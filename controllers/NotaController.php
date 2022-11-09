@@ -1,6 +1,6 @@
 <?php
 class NotaController{
-    //El controller tiene las diferentes acciones que se pueden hacer sobre las notas 
+    //El controller tiene las diferentes acciones que se pueden hacer sobre las notas  test
     public function listar(){
        
     }
