@@ -15,7 +15,7 @@ require_once "autoload.php";
 require_once "views/general/cabecera.html";
 require_once "views/general/menu.php";
 
-// Initialize the session
+// Initialize the sessions
 session_start();
  
 
