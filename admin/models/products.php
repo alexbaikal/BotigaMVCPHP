@@ -99,4 +99,16 @@ class Products extends Database
         $this->db->query("SET NAMES 'utf8'");
     }
 
+    function insertarProducto() {
+        $sql = "INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria, foto) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."')";
+        $this->db->query($sql);
+        return "Producto insertado: ".$this->nombre;
+    }
+
+    function eliminarProducto(){
+        $sql = "DELETE FROM productos WHERE id_producto = ".$this->id_producto;
+        $this->db->query($sql);
+        return "Producto eliminado: ".$this->id_producto."<br/>";
+    }
+
 }
