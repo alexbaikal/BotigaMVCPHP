@@ -116,8 +116,68 @@ class AdministradorController
         }
     }
 
+    public function modificarProducto()
+    {
+        if (isset($_POST)) {
+            require_once "./models/products.php";
+            $producto = new Products();
+
+            $producto->setIdProducto($_POST['id']);
+            $producto->setNombre($_POST['nombre']);
+            $producto->setDescripcion($_POST['descripcion']);
+            $producto->setCantidad($_POST['cantidad']);
+            $producto->setPrecio($_POST['precio']);
+            $producto->setCategoria($_POST['categoria']);
+            $producto->setFoto($_POST['foto']);
+
+            $producto->conectar();
+
+            echo "" . $producto->modificarProducto();
+
+
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todosLosProductos = $administrador->mostrarTodos();
+    
+            require_once "./views/mostrarProductos.php";
+
+
+
+            
+        //    return "Producto modificado: ".$_POST['nombre']."<br/>";
+        }
+    }
+
     public function modificar()
     {
+
+        
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            require_once "./models/products.php";
+
+            $producto = new Products();
+            $producto->setIdProducto($id);
+            $producto->conectar();
+            $producto->fetchProduct();
+            require_once "./views/modificarProducto.php";
+
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todosLosProductos = $administrador->mostrarTodos();
+    
+            require_once "./views/mostrarProductos.php";
+    
+
+        } else {
+            $id = "";
+            echo "Error, no se ha encontrado el producto";
+        }
+
+
     }
     public function eliminar()
     {

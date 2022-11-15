@@ -111,4 +111,31 @@ class Products extends Database
         return "Producto eliminado: ".$this->id_producto."<br/>";
     }
 
+    function modificarProducto() {
+        $sql = "UPDATE productos SET nombre = '".$this->nombre."', 
+            descripcion = '".$this->descripcion."',
+             cantidad = ".$this->cantidad.",
+             precio = ".$this->precio.",
+             categoria = ".$this->categoria.",
+             foto = '".$this->foto."' WHERE id_producto = ".$this->id_producto;
+            $this->db->query($sql);
+
+            return "Producto modificado: ".$this->nombre."<br/>";
+    }
+
+
+
+    function fetchProduct() {
+        $sql = "SELECT * FROM productos WHERE id_producto = ".$this->id_producto;
+        $result = $this->db->query($sql);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $this->nombre = $row['nombre'];
+        $this->descripcion = $row['descripcion'];
+        $this->cantidad = $row['cantidad'];
+        $this->precio = $row['precio'];
+        $this->categoria = $row['categoria'];
+        $this->foto = $row['foto'];
+
+    }
+
 }
