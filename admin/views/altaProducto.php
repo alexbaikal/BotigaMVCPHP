@@ -27,8 +27,16 @@
 
     Imagen:
     <input type="text" name = "foto">
+
+    Activo:
+    <input type="checkbox" name = "isactive">
+    <br/>
+
     <input type = "submit" value="Añadir producto">
     <br/>
+
+    
+    
 
 </form>
 

@@ -27,6 +27,14 @@
     <input type="number" name = "categoria"  value="<?php echo $producto->getCategoria() ?>">
     <br/>
 
+    Activo:
+    <input type="checkbox" name = "isactive" <?php if ($producto->getIsActive() == 1) {
+        echo "checked";
+    } else {
+        echo "";
+    } ?>>
+    
+
     Imagen:
     <input type="text" name = "foto"  value="<?php echo $producto->getFoto() ?>">
     <input type = "submit" value="Modificar producto">

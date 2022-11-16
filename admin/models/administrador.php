@@ -54,7 +54,7 @@ class Administrador extends Database
     {
         $this->fecha = $fecha;
     }
-    function mostrarTodos()
+    function mostrarProductos()
     {
         // prepare the statement. the placeholders allow PDO to handle substituting
         // the values, which also prevents SQL injection
@@ -71,6 +71,26 @@ class Administrador extends Database
 
         return $products;
     }
+
+    function mostrarCategorias()
+    {
+        // prepare the statement. the placeholders allow PDO to handle substituting
+        // the values, which also prevents SQL injection
+        $stmt = $this->db->prepare("SELECT * FROM categorias");
+
+        
+        $categories = array();
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $categories[] = $row;
+            }
+        }
+
+
+        return $categories;
+    }
+
+
     function registrarUsuario()
     {
         //encrypt password

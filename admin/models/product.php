@@ -1,6 +1,6 @@
 <?php
 require_once("../models/database.php");
-class Products extends Database
+class Product extends Database
 {
     private $id_producto;
     private $nombre;
@@ -9,6 +9,7 @@ class Products extends Database
     private $precio;
     private $categoria;
     private $foto;
+    private $isactive;
 
 /*
     public function setProduct(int $id_producto, string $nombre, string $descripcion, int $cantidad, float $precio, int $categoria, string $foto) {
@@ -56,6 +57,10 @@ class Products extends Database
     {
         return $this->foto;
     }
+    function getIsActive()
+    {
+        return $this->isactive;
+    }
 
     function setIdProducto($id_producto)
     {
@@ -92,6 +97,10 @@ class Products extends Database
         $this->foto = $foto;
     }
 
+    function setIsActive($isactive) {
+        $this->isactive = $isactive;
+    }
+
 
 
     function conectar()
@@ -100,7 +109,7 @@ class Products extends Database
     }
 
     function insertarProducto() {
-        $sql = "INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria, foto) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."')";
+        $sql = "INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria, foto, isactive) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."', ".$this->isactive.")";
         $this->db->query($sql);
         return "Producto insertado: ".$this->nombre;
     }
@@ -117,7 +126,8 @@ class Products extends Database
              cantidad = ".$this->cantidad.",
              precio = ".$this->precio.",
              categoria = ".$this->categoria.",
-             foto = '".$this->foto."' WHERE id_producto = ".$this->id_producto;
+             foto = '".$this->foto."',
+             isactive = ".$this->isactive." WHERE id_producto = ".$this->id_producto;
             $this->db->query($sql);
 
             return "Producto modificado: ".$this->nombre."<br/>";
@@ -135,7 +145,20 @@ class Products extends Database
         $this->precio = $row['precio'];
         $this->categoria = $row['categoria'];
         $this->foto = $row['foto'];
+        $this->isactive = $row['isactive'];
+    }
 
+    function activarProducto() {
+        if ($this->isactive == 1) {
+            $sql = "UPDATE productos SET isactive = 1 WHERE id_producto = ".$this->id_producto;
+            $this->db->query($sql);
+            return "Producto activado: ".$this->id_producto."<br/>";
+        } else {
+            $sql = "UPDATE productos SET isactive = 0 WHERE id_producto = ".$this->id_producto;
+            $this->db->query($sql);
+            return "Producto desactivado: ".$this->id_producto."<br/>";
+        }
+       
     }
 
 }

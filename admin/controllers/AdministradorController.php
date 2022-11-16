@@ -9,45 +9,34 @@ class AdministradorController
     {
 
         require_once "./models/administrador.php";
-        require_once "./models/products.php";
+        require_once "./models/product.php";
         $administrador = new Administrador();
 
-        $todosLosProductos = $administrador->mostrarTodos();
+        $todosLosProductos = $administrador->mostrarProductos();
 
         require_once "./views/mostrarProductos.php";
 
 
-        /*   // Create an array of products inside products model
-        $products = array();
-        foreach ($todosLosProductos as $producto) {
-            $products[] = new Products($producto['id_producto'], $producto['nombre'], $producto['descripcion'], $producto['cantidad'], $producto['precio'], $producto['categoria'], $producto['foto']);
-        }
-
-
-        return $products;
-        */
     }
 
 
 
+    public function iniciarVistaCategorias()
+    {
+
+        require_once "./models/administrador.php";
+        require_once "./models/category.php";
+        $administrador = new Administrador();
+
+        $todasLasCategorias = $administrador->mostrarCategorias();
+        require_once "./views/mostrarCategoria.php";
+
+
+    } 
 
 
 
-    /*  public function registrar(){
-        require_once "../views/usuarios/registrarUsuario.php";
-    }
-    public function alta(){
-       if (isset($_POST)){
-         require_once "../models/usuario.php";
-         $administrador = new Administrador();
-         $administrador->setUsername($_POST['username']);
-         $administrador->setPassword($_POST['password']);
-         $administrador->conectar();
-         echo "".$administrador->insertar();
-       }  
 
-    }
-*/
     public function iniciarLogin()
     {
         require_once "./views/adminLogin.php";
@@ -74,7 +63,7 @@ class AdministradorController
                     header("Location: admin.php");
                     $nombreController = "AdministradorController";
                     $controlador = new $nombreController();
-                    $action = "mostrarTodos";
+                    $action = "mostrarProductos";
                     $controlador->$action();
                     echo "Bienvenido " . $_SESSION['role'];
                 } else {
@@ -103,24 +92,65 @@ class AdministradorController
     public function altaProducto()
     {
         if (isset($_POST)) {
-            require_once "./models/products.php";
-            $producto = new Products();
+            require_once "./models/product.php";
+            $producto = new Product();
             $producto->setNombre($_POST['nombre']);
             $producto->setDescripcion($_POST['descripcion']);
             $producto->setCantidad($_POST['cantidad']);
             $producto->setPrecio($_POST['precio']);
             $producto->setCategoria($_POST['categoria']);
             $producto->setFoto($_POST['foto']);
+            if (isset($_POST['isactive'])) {
+                $producto->setIsActive(1);
+            } else {
+                $producto->setIsActive(0);
+            }
             $producto->conectar();
             echo "" . $producto->insertarProducto();
+
+            
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todosLosProductos = $administrador->mostrarProductos();
+    
+            require_once "./views/mostrarProductos.php";
+    
         }
     }
+
+    public function activarProducto()
+    {
+        if (isset($_POST)) {
+            require_once "./models/product.php";
+            $producto = new Product();
+            $producto->setIdProducto($_POST['id_producto']);
+            if (isset($_POST['isactive'])) {
+                $producto->setIsActive(1);
+            } else {
+                $producto->setIsActive(0);
+            }
+            $producto->conectar();
+            echo "" . $producto->activarProducto();
+
+            
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todosLosProductos = $administrador->mostrarProductos();
+    
+            require_once "./views/mostrarProductos.php";
+    
+
+        }
+    }
+    
 
     public function modificarProducto()
     {
         if (isset($_POST)) {
-            require_once "./models/products.php";
-            $producto = new Products();
+            require_once "./models/product.php";
+            $producto = new Product();
 
             $producto->setIdProducto($_POST['id']);
             $producto->setNombre($_POST['nombre']);
@@ -129,6 +159,11 @@ class AdministradorController
             $producto->setPrecio($_POST['precio']);
             $producto->setCategoria($_POST['categoria']);
             $producto->setFoto($_POST['foto']);
+            if (isset($_POST['isactive'])) {
+                $producto->setIsActive(1);
+            } else {
+                $producto->setIsActive(0);
+            }
 
             $producto->conectar();
 
@@ -138,7 +173,7 @@ class AdministradorController
             require_once "./models/administrador.php";
             $administrador = new Administrador();
     
-            $todosLosProductos = $administrador->mostrarTodos();
+            $todosLosProductos = $administrador->mostrarProductos();
     
             require_once "./views/mostrarProductos.php";
 
@@ -156,9 +191,9 @@ class AdministradorController
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
 
-            require_once "./models/products.php";
+            require_once "./models/product.php";
 
-            $producto = new Products();
+            $producto = new Product();
             $producto->setIdProducto($id);
             $producto->conectar();
             $producto->fetchProduct();
@@ -167,7 +202,7 @@ class AdministradorController
             require_once "./models/administrador.php";
             $administrador = new Administrador();
     
-            $todosLosProductos = $administrador->mostrarTodos();
+            $todosLosProductos = $administrador->mostrarProductos();
     
             require_once "./views/mostrarProductos.php";
     
@@ -184,17 +219,17 @@ class AdministradorController
 
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            require_once "./models/products.php";
-            $producto = new Products();
+            require_once "./models/product.php";
+            $producto = new Product();
             $producto->setIdProducto($id);
             $producto->conectar();
             echo "" . $producto->eliminarProducto();
 
             require_once "./models/administrador.php";
-            require_once "./models/products.php";
+            require_once "./models/product.php";
             $administrador = new Administrador();
     
-            $todosLosProductos = $administrador->mostrarTodos();
+            $todosLosProductos = $administrador->mostrarProductos();
     
             require_once "./views/mostrarProductos.php";
     
