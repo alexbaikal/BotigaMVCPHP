@@ -2,14 +2,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <?php
-
-  //add product button
-  echo "<a href='admin.php?controller=Administrador&action=iniciarAltaProducto' class='btn btn-primary'>Añadir producto</a>";
-
-   echo "<table border='1'>";
-  
-  
-    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de productos</p>";
+  if ($_SESSION['role'] == 'admin') {
+    echo "<a href='admin.php?controller=Administrador&action=iniciarAltaProducto' class='btn btn-primary'>Afegir categoria</a>";
+    echo "<table border='1'>";
+    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de categorias</p>";
     echo "<table border='1'>";
     echo "<tr>";
     echo "<th>Id</th>";
@@ -20,9 +16,7 @@
     echo "<th>Categoria</th>";
     echo "<th>Imagen</th>";
     echo "</tr>";
-       /*
     foreach ($todasLasCategorias as $categoria) {
-     
       echo "<tr>";
       echo "<td>".$categoria['id_producto']."</td>";
       echo "<td>". $categoria['nombre'] . "</td>";
@@ -51,7 +45,11 @@
       echo ">";
       echo "</form>";
       echo "</tr>";
-  }*/
+  }
     echo "</table>";
-
+  } else {
+    echo "<p>No tienes permisos para ver esta página</p>";
+    //redirect to admin.php after 3 seconds
+    header("Refresh:3; url=admin.php");
+  }
 ?>

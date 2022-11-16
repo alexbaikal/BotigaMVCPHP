@@ -4,6 +4,8 @@
 <?php
 
   //add product button
+  if ($_SESSION['role'] == 'admin') {
+  
   echo "<a href='admin.php?controller=Administrador&action=iniciarAltaProducto' class='btn btn-primary'>Añadir producto</a>";
 
    echo "<table border='1'>";
@@ -51,5 +53,10 @@
       echo "</tr>";
   }
     echo "</table>";
+} else {
+  echo "<p>Debes ser administrador para ver esta pagina</p>";
+  //refresh after 3 seconds
+  header("Refresh:3; url=admin.php");
+}
 
 ?>
