@@ -90,6 +90,20 @@ class Administrador extends Database
         return $categories;
     }
 
+    function mostrarPedidos()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM pedidos");
+
+        $pedidos = array();
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $pedidos[] = $row;
+            }
+        }
+
+        return $pedidos;
+    }
+
 
     function registrarUsuario()
     {

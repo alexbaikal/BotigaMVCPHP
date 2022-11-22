@@ -4,13 +4,7 @@ id admin
 usuario
 contraseña.
 
-usuario:
-id_usuario
-nombre_usuario
-correo
-contraseña
-direccion
-cp
+
 
 
 productos
@@ -28,14 +22,28 @@ foto
 
 Pedidos
 id_pedido
-cantidad
-usuario
+fk_id_usuario
+fk_id_cesta
+fk_id_empresa_transporte
+num_seguimiento
+estado (0; sin enviar, 1; enviado, 2; transportista o 3; recibido)
+fecha
 
 *
-empresa_mensajera.
+usuario:
+id_usuario
+nombre_usuario
+correo
+numero
+contraseña
+direccion
+provincia
+cp
+*
+empresa_transporte.
 id_empresa
 nombre
-trabajadores
+precio/producto
 
 
 

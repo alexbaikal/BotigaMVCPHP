@@ -1,66 +1,72 @@
 <?php
 require_once("../models/database.php");
-class Category extends Database
+class Pedido extends Database
 {
-    private $id_categoria;
-    private $nombre;
-    private $descripcion;
-    private $cantidad;
-    private $precio;
-    private $categoria;
-    private $foto;
-    private $isactive;
+    private $id_pedido;
+    private $fk_id_cesta;
+    private $fk_id_empresa_transporte;
+    private $fk_id_usuario;
+    private $num_seguimiento;
+    private $estado;
 
-/*
-    public function setProduct(int $id_categoria, string $nombre, string $descripcion, int $cantidad, float $precio, int $categoria, string $foto) {
-        $this->id_categoria = $id_categoria;
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->cantidad = $cantidad;
-        $this->precio = $precio;
-        $this->categoria = $categoria;
-        $this->foto = $foto;
-    }
-*/
-
-    function getIdCategoria()
+    function getIdPedido()
     {
-        return $this->id_categoria;
+        return $this->id_pedido;
     }
 
-    function getNombre()
+    function getFkIdCesta()
     {
-        return $this->nombre;
+        return $this->fk_id_cesta;
     }
 
-    function getDescripcion()
+    function getFkIdEmpresaTransporte()
     {
-        return $this->descripcion;
+        return $this->fk_id_empresa_transporte;
     }
 
-    function getIsActive()
+    function getFkIdUsuario()
     {
-        return $this->isactive;
+        return $this->fk_id_usuario;
     }
 
-    function setIdCategoria($id_categoria)
+    function getNumSeguimiento()
     {
-        $this->id_categoria = $id_categoria;
+        return $this->num_seguimiento;
     }
 
-    function setNombre($nombre)
+    function getEstado()
     {
-        $this->nombre = $nombre;
+        return $this->estado;
     }
 
-    function setDescripcion($descripcion)
+    function setIdPedido($id_pedido)
     {
-        $this->descripcion = $descripcion;
+        $this->id_pedido = $id_pedido;
     }
 
+    function setFkIdCesta($fk_id_cesta)
+    {
+        $this->fk_id_cesta = $fk_id_cesta;
+    }
 
-    function setIsActive($isactive) {
-        $this->isactive = $isactive;
+    function setFkIdEmpresaTransporte($fk_id_empresa_transporte)
+    {
+        $this->fk_id_empresa_transporte = $fk_id_empresa_transporte;
+    }
+
+    function setFkIdUsuario($fk_id_usuario)
+    {
+        $this->fk_id_usuario = $fk_id_usuario;
+    }
+
+    function setNumSeguimiento($num_seguimiento)
+    {
+        $this->num_seguimiento = $num_seguimiento;
+    }
+
+    function setEstado($estado)
+    {
+        $this->estado = $estado;
     }
 
 
@@ -71,7 +77,7 @@ class Category extends Database
     }
 
     function insertarCategoria() {
-        $sql = "INSERT INTO categorias (nombre, descripcion, isactive) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->isactive.")";
+        $sql = "INSERT INTO pedidos (nombre, descripcion, cantidad, precio, categoria, foto, isactive) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."', ".$this->isactive.")";
         $this->db->query($sql);
         return "Categoria insertada: ".$this->nombre;
     }

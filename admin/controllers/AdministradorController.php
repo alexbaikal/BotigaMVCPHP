@@ -15,8 +15,6 @@ class AdministradorController
         $todosLosProductos = $administrador->mostrarProductos();
 
         require_once "./views/mostrarProductos.php";
-
-
     }
 
 
@@ -29,10 +27,19 @@ class AdministradorController
         $administrador = new Administrador();
 
         $todasLasCategorias = $administrador->mostrarCategorias();
-        require_once "./views/mostrarCategoria.php";
+        require_once "./views/mostrarCategorias.php";
+    }
 
+    public function iniciarVistaPedidos()
+    {
 
-    } 
+        require_once "./models/administrador.php";
+        require_once "./models/pedido.php";
+        $administrador = new Administrador();
+
+        $todosLosPedidos = $administrador->mostrarPedidos();
+        require_once "./views/mostrarPedidos.php";
+    }
 
 
 
@@ -89,6 +96,16 @@ class AdministradorController
         require_once "./views/altaProducto.php";
     }
 
+    public function iniciarAltaPedido()
+    {
+        require_once "./views/altaPedido.php";
+    }
+
+    public function iniciarAltaCategoria()
+    {
+        require_once "./views/altaCategoria.php";
+    }
+
     public function altaProducto()
     {
         if (isset($_POST)) {
@@ -100,22 +117,40 @@ class AdministradorController
             $producto->setPrecio($_POST['precio']);
             $producto->setCategoria($_POST['categoria']);
             $producto->setFoto($_POST['foto']);
-            if (isset($_POST['isactive'])) {
-                $producto->setIsActive(1);
-            } else {
-                $producto->setIsActive(0);
-            }
+            $producto->setIsActive(1);
+
             $producto->conectar();
             echo "" . $producto->insertarProducto();
 
-            
+
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
+
             $todosLosProductos = $administrador->mostrarProductos();
-    
+
             require_once "./views/mostrarProductos.php";
-    
+        }
+    }
+
+    public function altaCategoria()
+    {
+        if (isset($_POST)) {
+            require_once "./models/category.php";
+            $categoria = new Category();
+            $categoria->setNombre($_POST['nombre']);
+            $categoria->setDescripcion($_POST['descripcion']);
+            $categoria->setIsActive(1);
+
+            $categoria->conectar();
+            echo "" . $categoria->insertarCategoria();
+
+
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+
+            $todasLasCategorias = $administrador->mostrarCategorias();
+
+            require_once "./views/mostrarCategorias.php";
         }
     }
 
@@ -133,18 +168,16 @@ class AdministradorController
             $producto->conectar();
             echo "" . $producto->activarProducto();
 
-            
+
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
-            $todosLosProductos = $administrador->mostrarProductos();
-    
-            require_once "./views/mostrarProductos.php";
-    
 
+            $todosLosProductos = $administrador->mostrarProductos();
+
+            require_once "./views/mostrarProductos.php";
         }
     }
-    
+
 
     public function modificarProducto()
     {
@@ -172,15 +205,15 @@ class AdministradorController
 
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
+
             $todosLosProductos = $administrador->mostrarProductos();
-    
+
             require_once "./views/mostrarProductos.php";
 
 
 
-            
-        //    return "Producto modificado: ".$_POST['nombre']."<br/>";
+
+            //    return "Producto modificado: ".$_POST['nombre']."<br/>";
         }
     }
 
@@ -206,22 +239,22 @@ class AdministradorController
 
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
+
             $todasLasCategorias = $administrador->mostrarCategorias();
-    
-            require_once "./views/mostrarCategoria.php";
+
+            require_once "./views/mostrarCategorias.php";
 
 
 
-            
-        //    return "Producto modificado: ".$_POST['nombre']."<br/>";
+
+            //    return "Producto modificado: ".$_POST['nombre']."<br/>";
         }
     }
 
     public function iniciarModificarProducto()
     {
 
-        
+
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
 
@@ -235,25 +268,21 @@ class AdministradorController
 
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
-            $todosLosProductos = $administrador->mostrarProductos();
-    
-            require_once "./views/mostrarProductos.php";
-    
 
+            $todosLosProductos = $administrador->mostrarProductos();
+
+            require_once "./views/mostrarProductos.php";
         } else {
             $id = "";
             echo "Error, no se ha encontrado el producto";
         }
-
-
     }
 
 
     public function iniciarModificarCategoria()
     {
 
-        
+
         if (isset($_GET['id_categoria'])) {
             $id = $_GET['id_categoria'];
 
@@ -267,18 +296,14 @@ class AdministradorController
 
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
-            $todasLasCategorias = $administrador->mostrarCategorias();
-    
-            require_once "./views/mostrarCategoria.php";
-    
 
+            $todasLasCategorias = $administrador->mostrarCategorias();
+
+            require_once "./views/mostrarCategorias.php";
         } else {
             $id = "";
             echo "Error, no se ha encontrado el producto";
         }
-
-
     }
 
     public function eliminarProducto()
@@ -295,12 +320,10 @@ class AdministradorController
             require_once "./models/administrador.php";
             require_once "./models/product.php";
             $administrador = new Administrador();
-    
-            $todosLosProductos = $administrador->mostrarProductos();
-    
-            require_once "./views/mostrarProductos.php";
-    
 
+            $todosLosProductos = $administrador->mostrarProductos();
+
+            require_once "./views/mostrarProductos.php";
         } else {
             $id = "";
             echo "Error, no se ha encontrado el producto";
@@ -322,12 +345,10 @@ class AdministradorController
             require_once "./models/administrador.php";
             require_once "./models/category.php";
             $administrador = new Administrador();
-    
-            $todasLasCategorias = $administrador->mostrarCategorias();
-    
-            require_once "./views/mostrarCategoria.php";
-    
 
+            $todasLasCategorias = $administrador->mostrarCategorias();
+
+            require_once "./views/mostrarCategorias.php";
         } else {
             $id = "";
             echo "Error, no se ha encontrado el producto";
@@ -348,15 +369,13 @@ class AdministradorController
             $categoria->conectar();
             echo "" . $categoria->activarCategoria();
 
-            
+
             require_once "./models/administrador.php";
             $administrador = new Administrador();
-    
-            $todasLasCategorias = $administrador->mostrarCategorias();
-    
-            require_once "./views/mostrarCategoria.php";
-    
 
+            $todasLasCategorias = $administrador->mostrarCategorias();
+
+            require_once "./views/mostrarCategorias.php";
         }
     }
     public function ver()

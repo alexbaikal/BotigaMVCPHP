@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 09:57 AM
+-- Generation Time: Nov 22, 2022 at 10:48 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -59,7 +59,31 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) VALUES
 (1, 'Zapatos', 'Replica exacta.', 1),
-(3, 'Todos', 'De todo!', 1);
+(3, 'Todos', 'De todo!', 1),
+(4, 'Blusas', 'Bastante grandes ', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id_pedido` int(11) NOT NULL,
+  `fk_id_cesta` int(11) NOT NULL,
+  `fk_id_empresa_transporte` int(11) NOT NULL,
+  `fk_id_usuario` int(11) NOT NULL,
+  `num_seguimiento` varchar(128) DEFAULT NULL,
+  `estado` int(1) NOT NULL,
+  `fecha` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pedidos`
+--
+
+INSERT INTO `pedidos` (`id_pedido`, `fk_id_cesta`, `fk_id_empresa_transporte`, `fk_id_usuario`, `num_seguimiento`, `estado`, `fecha`) VALUES
+(1, 0, 0, 0, 'sin seguimiento', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -103,6 +127,12 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
+-- Indexes for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id_pedido`);
+
+--
 -- Indexes for table `productos`
 --
 ALTER TABLE `productos`
@@ -123,7 +153,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `productos`
