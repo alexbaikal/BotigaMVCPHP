@@ -31,8 +31,8 @@
       echo "<td>".$producto['precio'] . "</td>";
       echo "<td>".$producto['categoria'] . "</td>";
       echo "<td><img src='".$producto['foto']."' width='100' height='100'/></td>";
-      echo "<td><a href='?controller=Administrador&action=eliminar&id=".$producto['id_producto']."'>Eliminar</a></td>";
-      echo "<td><a href='?controller=Administrador&action=modificar&id=".$producto['id_producto']."'>Modificar</a></td>";
+      echo "<td><a href='?controller=Administrador&action=eliminarProducto&id=".$producto['id_producto']."'>Eliminar</a></td>";
+      echo "<td><a href='?controller=Administrador&action=iniciarModificarProducto&id=".$producto['id_producto']."'>Modificar</a></td>";
       echo "<td>";
       if ($producto['isactive'] == 1) {
         echo "<p>Activo</p>";

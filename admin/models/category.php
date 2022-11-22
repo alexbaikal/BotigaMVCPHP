@@ -2,7 +2,7 @@
 require_once("../models/database.php");
 class Category extends Database
 {
-    private $id_producto;
+    private $id_categoria;
     private $nombre;
     private $descripcion;
     private $cantidad;
@@ -12,8 +12,8 @@ class Category extends Database
     private $isactive;
 
 /*
-    public function setProduct(int $id_producto, string $nombre, string $descripcion, int $cantidad, float $precio, int $categoria, string $foto) {
-        $this->id_producto = $id_producto;
+    public function setProduct(int $id_categoria, string $nombre, string $descripcion, int $cantidad, float $precio, int $categoria, string $foto) {
+        $this->id_categoria = $id_categoria;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->cantidad = $cantidad;
@@ -23,9 +23,9 @@ class Category extends Database
     }
 */
 
-    function getIdProducto()
+    function getIdCategoria()
     {
-        return $this->id_producto;
+        return $this->id_categoria;
     }
 
     function getNombre()
@@ -38,33 +38,14 @@ class Category extends Database
         return $this->descripcion;
     }
 
-    function getCantidad()
-    {
-        return $this->cantidad;
-    }
-
-    function getPrecio()
-    {
-        return $this->precio;
-    }
-
-    function getCategoria()
-    {
-        return $this->categoria;
-    }
-
-    function getFoto()
-    {
-        return $this->foto;
-    }
     function getIsActive()
     {
         return $this->isactive;
     }
 
-    function setIdProducto($id_producto)
+    function setIdCategoria($id_categoria)
     {
-        $this->id_producto = $id_producto;
+        $this->id_categoria = $id_categoria;
     }
 
     function setNombre($nombre)
@@ -108,55 +89,47 @@ class Category extends Database
         $this->db->query("SET NAMES 'utf8'");
     }
 
-    function insertarProducto() {
-        $sql = "INSERT INTO productos (nombre, descripcion, cantidad, precio, categoria, foto, isactive) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."', ".$this->isactive.")";
+    function insertarCategoria() {
+        $sql = "INSERT INTO categorias (nombre, descripcion, cantidad, precio, categoria, foto, isactive) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."', ".$this->isactive.")";
         $this->db->query($sql);
-        return "Producto insertado: ".$this->nombre;
+        return "Categoria insertada: ".$this->nombre;
     }
 
-    function eliminarProducto(){
-        $sql = "DELETE FROM productos WHERE id_producto = ".$this->id_producto;
+    function eliminarCategoria(){
+        $sql = "DELETE FROM categorias WHERE id_categoria = ".$this->id_categoria;
         $this->db->query($sql);
-        return "Producto eliminado: ".$this->id_producto."<br/>";
+        return "Categoria eliminada: ".$this->id_categoria."<br/>";
     }
 
-    function modificarProducto() {
-        $sql = "UPDATE productos SET nombre = '".$this->nombre."', 
+    function modificarCategoria() {
+        $sql = "UPDATE categorias SET nombre = '".$this->nombre."', 
             descripcion = '".$this->descripcion."',
-             cantidad = ".$this->cantidad.",
-             precio = ".$this->precio.",
-             categoria = ".$this->categoria.",
-             foto = '".$this->foto."',
-             isactive = ".$this->isactive." WHERE id_producto = ".$this->id_producto;
+             isactive = ".$this->isactive." WHERE id_categoria = ".$this->id_categoria;
             $this->db->query($sql);
 
-            return "Producto modificado: ".$this->nombre."<br/>";
+            return "Categoria modificada: ".$this->nombre."<br/>";
     }
 
 
 
-    function fetchProduct() {
-        $sql = "SELECT * FROM productos WHERE id_producto = ".$this->id_producto;
+    function fetchCategoria() {
+        $sql = "SELECT * FROM categorias WHERE id_categoria = ".$this->id_categoria;
         $result = $this->db->query($sql);
         $row = $result->fetch(PDO::FETCH_ASSOC);
         $this->nombre = $row['nombre'];
         $this->descripcion = $row['descripcion'];
-        $this->cantidad = $row['cantidad'];
-        $this->precio = $row['precio'];
-        $this->categoria = $row['categoria'];
-        $this->foto = $row['foto'];
         $this->isactive = $row['isactive'];
     }
 
-    function activarProducto() {
+    function activarCategoria() {
         if ($this->isactive == 1) {
-            $sql = "UPDATE productos SET isactive = 1 WHERE id_producto = ".$this->id_producto;
+            $sql = "UPDATE categorias SET isactive = 1 WHERE id_categoria = ".$this->id_categoria;
             $this->db->query($sql);
-            return "Producto activado: ".$this->id_producto."<br/>";
+            return "Categoria activada: ".$this->id_categoria."<br/>";
         } else {
-            $sql = "UPDATE productos SET isactive = 0 WHERE id_producto = ".$this->id_producto;
+            $sql = "UPDATE categorias SET isactive = 0 WHERE id_categoria = ".$this->id_categoria;
             $this->db->query($sql);
-            return "Producto desactivado: ".$this->id_producto."<br/>";
+            return "Categoria desactivada: ".$this->id_categoria."<br/>";
         }
        
     }

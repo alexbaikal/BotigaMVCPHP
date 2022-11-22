@@ -184,7 +184,41 @@ class AdministradorController
         }
     }
 
-    public function modificar()
+    public function modificarCategoria()
+    {
+        if (isset($_POST)) {
+            require_once "./models/category.php";
+            $categoria = new Category();
+
+            $categoria->setIdCategoria($_POST['id_categoria']);
+            $categoria->setNombre($_POST['nombre']);
+            $categoria->setDescripcion($_POST['descripcion']);
+            if (isset($_POST['isactive'])) {
+                $categoria->setIsActive(1);
+            } else {
+                $categoria->setIsActive(0);
+            }
+
+            $categoria->conectar();
+
+            echo "" . $categoria->modificarCategoria();
+
+
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todasLasCategorias = $administrador->mostrarCategorias();
+    
+            require_once "./views/mostrarCategoria.php";
+
+
+
+            
+        //    return "Producto modificado: ".$_POST['nombre']."<br/>";
+        }
+    }
+
+    public function iniciarModificarProducto()
     {
 
         
@@ -214,7 +248,40 @@ class AdministradorController
 
 
     }
-    public function eliminar()
+
+
+    public function iniciarModificarCategoria()
+    {
+
+        
+        if (isset($_GET['id_categoria'])) {
+            $id = $_GET['id_categoria'];
+
+            require_once "./models/category.php";
+
+            $categoria = new Category();
+            $categoria->setIdCategoria($id);
+            $categoria->conectar();
+            $categoria->fetchCategoria();
+            require_once "./views/modificarCategoria.php";
+
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todasLasCategorias = $administrador->mostrarCategorias();
+    
+            require_once "./views/mostrarCategoria.php";
+    
+
+        } else {
+            $id = "";
+            echo "Error, no se ha encontrado el producto";
+        }
+
+
+    }
+
+    public function eliminarProducto()
     {
 
         if (isset($_GET['id'])) {
@@ -239,9 +306,58 @@ class AdministradorController
             echo "Error, no se ha encontrado el producto";
         }
     }
-    public function activar()
+
+
+    public function eliminarCategoria()
     {
-        echo "Estoy en activar";
+
+        if (isset($_GET['id_categoria'])) {
+            $id = $_GET['id_categoria'];
+            require_once "./models/category.php";
+            $categoria = new Category();
+            $categoria->setIdCategoria($id);
+            $categoria->conectar();
+            echo "" . $categoria->eliminarCategoria();
+
+            require_once "./models/administrador.php";
+            require_once "./models/category.php";
+            $administrador = new Administrador();
+    
+            $todasLasCategorias = $administrador->mostrarCategorias();
+    
+            require_once "./views/mostrarCategoria.php";
+    
+
+        } else {
+            $id = "";
+            echo "Error, no se ha encontrado el producto";
+        }
+    }
+
+    public function activarCategoria()
+    {
+        if (isset($_POST)) {
+            require_once "./models/category.php";
+            $categoria = new Category();
+            $categoria->setIdCategoria($_POST['id_categoria']);
+            if (isset($_POST['isactive'])) {
+                $categoria->setIsActive(1);
+            } else {
+                $categoria->setIsActive(0);
+            }
+            $categoria->conectar();
+            echo "" . $categoria->activarCategoria();
+
+            
+            require_once "./models/administrador.php";
+            $administrador = new Administrador();
+    
+            $todasLasCategorias = $administrador->mostrarCategorias();
+    
+            require_once "./views/mostrarCategoria.php";
+    
+
+        }
     }
     public function ver()
     {

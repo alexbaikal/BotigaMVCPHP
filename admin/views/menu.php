@@ -11,7 +11,7 @@
     }
     if ($role == 'admin') {
 
-        echo "Bienvenido " . $_SESSION['role'];
+        echo "<li>Bienvenido " . $_SESSION['role']."</li>";
         echo '<li> <a href="/botiga/index.php">Volver</a></li>';
 
 
