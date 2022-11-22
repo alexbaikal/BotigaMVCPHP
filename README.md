@@ -13,30 +13,30 @@ Permite:
   
   <u>Pasos a seguir para construir el proyecto:</u>
 
-```
-Ubicarse en la carpeta htdocs dentro de la instalación de XAMPP o phpmyadmin
-```
 
-```
-git clone https://github.com/alexbaikal/BotigaMVCPHP.git
-```
-
-```
-cd botiga
-```
-
-```
-Iniciar la base de datos MySQL y servidor Apache mediante XAMPP o cualquier otra herramienta relacionada a phpmyadmin
-```
-
-```
-Crear base de datos llamada "botiga" mediante phpmyadmin
-```
+·Ubicarse en la carpeta htdocs dentro de la instalación de XAMPP o phpmyadmin
 
 
 ```
-Importar base de datos ubicada en ./baseDatos.sql a la base de datos "botiga"
+$git clone https://github.com/alexbaikal/BotigaMVCPHP.git
 ```
+
+```
+$cd botiga
+```
+
+
+·Iniciar la base de datos MySQL y servidor Apache mediante XAMPP o cualquier otra herramienta relacionada a phpmyadmin
+
+
+
+·Crear base de datos llamada "botiga" mediante phpmyadmin
+
+
+
+
+·Importar base de datos ubicada en ./baseDatos.sql a la base de datos "botiga"
+
 
 
 Usuario administrador predeterminado:
