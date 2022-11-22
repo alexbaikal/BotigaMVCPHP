@@ -18,11 +18,11 @@ Permite:
 
 
 ```
-$git clone https://github.com/alexbaikal/BotigaMVCPHP.git
+$ git clone https://github.com/alexbaikal/BotigaMVCPHP.git
 ```
 
 ```
-$cd botiga
+$ cd botiga
 ```
 
 
