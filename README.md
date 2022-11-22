@@ -1,4 +1,3 @@
-﻿# Botiga virtual PHP amb Model Vista Controlador
 <h1>Tienda virutal PHP Model Vista Controlador XAMPP</h1>
 <hl/>
 <b>Proyecto creado para módulo diseño de interfaces web y desarrollo en entorno servidor en IES La Pineda ❤️</b>
