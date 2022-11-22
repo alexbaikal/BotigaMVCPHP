@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2022 at 10:09 AM
+-- Generation Time: Nov 22, 2022 at 09:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -50,8 +50,16 @@ CREATE TABLE `categorias` (
   `id_categoria` int(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `estado` tinyint(1) NOT NULL
+  `isactive` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categorias`
+--
+
+INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) VALUES
+(1, 'Zapatos', 'Replica exacta.', 1),
+(3, 'Todos', 'De todo!', 1);
 
 -- --------------------------------------------------------
 
@@ -115,7 +123,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `productos`
