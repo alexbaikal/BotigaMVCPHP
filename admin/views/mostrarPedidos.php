@@ -16,16 +16,18 @@ if ($_SESSION['role'] == 'admin') {
     echo "<th>Estado</th>";
     echo "<th>Fecha</th>";
     echo "</tr>";
+
+
     foreach ($todosLosPedidos as $pedido) {
         echo "<tr>";
         echo "<td>" . $pedido['id_pedido'] . "</td>";
         echo "<td>" . $pedido['fk_id_cesta'] . "</td>";
         echo "<td>" . $pedido['fk_id_empresa_transporte'] . "</td>";
-        echo "<td>" . $pedido['fk_id_usuario'] . "</td>";
+        echo "<td>" . $pedidos->getNombreUsuario($pedido['fk_id_usuario']) . "</td>";
         echo "<td>" . $pedido['num_seguimiento'] . "</td>";
         echo "<td>" . $pedido['estado'] . "</td>";
-        echo "<td><a href='?controller=Administrador&action=eliminadPedido&id_pedido=" . $pedido['id_pedido'] . "'>Eliminar</a><br/>";
-        echo "<a href='?controller=Administrador&action=iniciarModificarPedido&id_pedido=" . $pedido['id_pedido'] . "'>Modificar</a></td>";
+        //echo "<td><a href='?controller=Administrador&action=eliminadPedido&id_pedido=" . $pedido['id_pedido'] . "'>Eliminar</a><br/>";
+        echo "<td><a href='?controller=Administrador&action=iniciarModificarPedido&id_pedido=" . $pedido['id_pedido'] . "'>Modificar</a></td>";
         echo "</tr>";
     }
     echo "</table>";

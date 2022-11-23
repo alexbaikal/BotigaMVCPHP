@@ -30,9 +30,9 @@ estado (0; sin enviar, 1; enviado, 2; transportista o 3; recibido)
 fecha
 
 *
-usuario:
+usuarios:
 id_usuario
-nombre_usuario
+nombre
 correo
 numero
 contraseña
@@ -40,12 +40,13 @@ direccion
 provincia
 cp
 *
-empresa_transporte.
+empresa_transporte:
 id_empresa
 nombre
 precio/producto
-
-
-
-
-
+*
+cesta:
+id_cesta
+fk_id_usuario
+lista_productos
+precio_total

@@ -15,6 +15,9 @@ Nombre:
     <br/>
 
     <input type = "submit" value="Afegir categoria">
-    <br/>
 </form>
+<br/>
+
+<button type="button" class="btn btn-primary" onclick="window.location.href='admin.php?controller=Administrador&action=iniciarVistaCategorias'">Tornar</button>
+
 

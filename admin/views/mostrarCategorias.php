@@ -19,8 +19,8 @@
       echo "<td>".$categoria['id_categoria']."</td>";
       echo "<td>". $categoria['nombre'] . "</td>";
       echo "<td>".$categoria['descripcion'] . "</td>";
-      echo "<td><a href='?controller=Administrador&action=eliminarCategoria&id_categoria=".$categoria['id_categoria']."'>Eliminar</a><br/>";
-      echo "<a href='?controller=Administrador&action=iniciarModificarCategoria&id_categoria=".$categoria['id_categoria']."'>Modificar</a></td>";
+      //echo "<td><a href='?controller=Administrador&action=eliminarCategoria&id_categoria=".$categoria['id_categoria']."'>Eliminar</a><br/>";
+      echo "<td><a href='?controller=Administrador&action=iniciarModificarCategoria&id_categoria=".$categoria['id_categoria']."'>Modificar</a></td>";
       echo "<td>";
       if ($categoria['isactive'] == 1) {
         echo "<p>Activo</p>";

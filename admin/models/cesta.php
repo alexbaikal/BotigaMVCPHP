@@ -1,92 +1,45 @@
 <?php
 require_once("../models/database.php");
-class Pedido extends Database
+class Cesta extends Database
 {
-    private $id_pedido;
-    private $fk_id_cesta;
-    private $fk_id_empresa_transporte;
+    private $id_cesta;
     private $fk_id_usuario;
-    private $nombre_usuario;
-    private $num_seguimiento;
-    private $estado;
-    private $fecha;
+    private $lista_productos;
+    private $precio_total;
 
-    function getIdPedido()
+    function getIdCesta()
     {
-        return $this->id_pedido;
+        return $this->id_cesta;
     }
-
-    function getFkIdCesta()
-    {
-        return $this->fk_id_cesta;
-    }
-
-    function getFkIdEmpresaTransporte()
-    {
-        return $this->fk_id_empresa_transporte;
-    }
-
     function getFkIdUsuario()
     {
         return $this->fk_id_usuario;
     }
-
-    function getNombreUsuario($id)
+    function getListaProductos()
     {
-        //connect to database and search for the user
-        $sql = "SELECT nombre FROM usuarios WHERE id_usuario = ".$id;
-        $result = $this->db->query($sql);
-        $this->nombre_usuario = $result;
-        return $this->nombre_usuario;
+        return $this->lista_productos;
+    }
+    function getPrecioTotal()
+    {
+        return $this->precio_total;
     }
 
-    function getNumSeguimiento()
-    {
-        return $this->num_seguimiento;
-    }
 
-    function getEstado()
+    function setIdCesta($id_cesta)
     {
-        return $this->estado;
+        $this->id_cesta = $id_cesta;
     }
-
-    function getFecha()
-    {
-        return $this->fecha;
-    }
-
-    function setIdPedido($id_pedido)
-    {
-        $this->id_pedido = $id_pedido;
-    }
-
-    function setFkIdCesta($fk_id_cesta)
-    {
-        $this->fk_id_cesta = $fk_id_cesta;
-    }
-
-    function setFkIdEmpresaTransporte($fk_id_empresa_transporte)
-    {
-        $this->fk_id_empresa_transporte = $fk_id_empresa_transporte;
-    }
-
     function setFkIdUsuario($fk_id_usuario)
     {
         $this->fk_id_usuario = $fk_id_usuario;
     }
-
-    function setNumSeguimiento($num_seguimiento)
+    function setListaProductos($lista_productos)
     {
-        $this->num_seguimiento = $num_seguimiento;
+        $this->lista_productos = $lista_productos;
     }
-
-    function setEstado($estado)
+    function setPrecioTotal($precio_total)
     {
-        $this->estado = $estado;
-    }
-    function setFecha($fecha)
-    {
-        $this->fecha = $fecha;
+        $this->precio_total = $precio_total;
     }
 
 
@@ -120,16 +73,14 @@ class Pedido extends Database
 
 
 
-    function fetchPedido() {
-        $sql = "SELECT * FROM pedidos WHERE id_pedido = ".$this->id_pedido;
+    function fetchCesta() {
+        $sql = "SELECT * FROM cestas WHERE id_cesta = ".$this->id_cesta;
+        echo "idcesta:".$this->id_cesta;
         $result = $this->db->query($sql);
         $row = $result->fetch(PDO::FETCH_ASSOC);
-        $this->fk_id_cesta = $row['fk_id_cesta'];
-        $this->fk_id_empresa_transporte = $row['fk_id_empresa_transporte'];
         $this->fk_id_usuario = $row['fk_id_usuario'];
-        $this->num_seguimiento = $row['num_seguimiento'];
-        $this->estado = $row['estado'];
-        $this->fecha = $row['fecha'];
+        $this->lista_productos = $row['lista_productos'];
+        $this->precio_total = $row['precio_total'];
     }
 
     function activarCategoria() {
