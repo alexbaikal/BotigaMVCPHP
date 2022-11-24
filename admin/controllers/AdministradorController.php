@@ -41,6 +41,7 @@ class AdministradorController
         $administrador = new Administrador();
 
         $todosLosPedidos = $administrador->mostrarPedidos();
+
         require_once "./views/mostrarPedidos.php";
     }
 
@@ -358,10 +359,13 @@ class AdministradorController
             require_once "./views/modificarPedido.php";
 
             require_once "./models/administrador.php";
+            
+            $pedidos = new Pedido();
+    
             $administrador = new Administrador();
-
+    
             $todosLosPedidos = $administrador->mostrarPedidos();
-
+    
             require_once "./views/mostrarPedidos.php";
         } else {
             $id = "";

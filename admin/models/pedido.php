@@ -33,11 +33,16 @@ class Pedido extends Database
 
     function getNombreUsuario($id)
     {
+        $id_usuario = strval($id);
         //connect to database and search for the user
-        $sql = "SELECT nombre FROM usuarios WHERE id_usuario = ".$id;
+        $sql = "SELECT nombre FROM usuarios WHERE id_usuario = ".$id_usuario;
         $result = $this->db->query($sql);
-        $this->nombre_usuario = $result;
-        return $this->nombre_usuario;
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $nombre = $row['nombre'];
+        $this->nombre_usuario = $nombre;
+
+        return $nombre;
+
     }
 
     function getNumSeguimiento()

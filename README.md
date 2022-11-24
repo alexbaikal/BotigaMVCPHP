@@ -1,6 +1,6 @@
 <h1>Tienda virutal PHP Model Vista Controlador XAMPP</h1>
 <hl/>
-<b>Proyecto creado para módulo diseño de interfaces web y desarrollo en entorno servidor en IES La Pineda ❤️</b>
+<b>Proyecto creado para módulo diseño de interfaces web y desarrollo en entorno servidor en IES La Pineda</b>
 <hl/>
 
 Permite:

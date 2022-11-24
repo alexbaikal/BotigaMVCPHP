@@ -5,7 +5,7 @@
 if ($_SESSION['role'] == 'admin') {
     echo "<a href='admin.php?controller=Administrador&action=iniciarAltaPedido' class='btn btn-primary'>Añadir pedido</a>";
     echo "<table border='1'>";
-    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de categorias</p>";
+    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de pedidos</p>";
     echo "<table border='1'>";
     echo "<tr>";
     echo "<th>Id</th>";
@@ -31,6 +31,7 @@ if ($_SESSION['role'] == 'admin') {
         echo "</tr>";
     }
     echo "</table>";
+    
 } else {
     echo "<p>No tienes permisos para ver esta página</p>";
     //redirect to admin.php after 3 seconds
