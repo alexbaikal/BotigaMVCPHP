@@ -30,20 +30,7 @@ class AdministradorController
         require_once "./views/mostrarCategorias.php";
     }
 
-    public function iniciarVistaPedidos()
-    {
 
-        require_once "./models/administrador.php";
-        require_once "./models/pedido.php";
-        
-        $pedidos = new Pedido();
-
-        $administrador = new Administrador();
-
-        $todosLosPedidos = $administrador->mostrarPedidos();
-
-        require_once "./views/mostrarPedidos.php";
-    }
 
 
 
@@ -100,10 +87,7 @@ class AdministradorController
         require_once "./views/altaProducto.php";
     }
 
-    public function iniciarAltaPedido()
-    {
-        require_once "./views/altaPedido.php";
-    }
+
 
     public function iniciarAltaCategoria()
     {
@@ -255,38 +239,7 @@ class AdministradorController
         }
     }
 
-    public function modificarPedido()
-    {
-        if (isset($_POST)) {
-            require_once "./models/pedido.php";
-            $pedido = new Pedido();
 
-            $pedido->setIdPedido($_POST['id_pedido']);
-            $pedido->setFkIdEmpresaTransporte($_POST['fk_id_empresa_transporte']);
-            $pedido->setFkIdUsuario($_POST['fk_id_usuario']);
-            $pedido->setNumSeguimiento($_POST['num_seguimiento']);
-            $pedido->setEstado($_POST['estado']);
-            $pedido->setFecha($_POST['fecha']);
-            
-
-            $pedido->conectar();
-
-            echo "" . $pedido->modificarPedido();
-
-
-            require_once "./models/administrador.php";
-            $administrador = new Administrador();
-
-            $todosLosPedidos = $administrador->mostrarPedidos();
-
-            require_once "./views/mostrarPedidos.php";
-
-
-
-
-            //    return "Producto modificado: ".$_POST['nombre']."<br/>";
-        }
-    }
 
     public function iniciarModificarProducto()
     {
@@ -343,59 +296,9 @@ class AdministradorController
         }
     }
 
-    public function iniciarModificarPedido()
-    {
-
-
-        if (isset($_GET['id_pedido'])) {
-            $id = $_GET['id_pedido'];
-
-            require_once "./models/pedido.php";
-
-            $pedido = new Pedido();
-            $pedido->setIdPedido($id);
-            $pedido->conectar();
-            $pedido->fetchPedido();
-            require_once "./views/modificarPedido.php";
-
-            require_once "./models/administrador.php";
-            
-            $pedidos = new Pedido();
     
-            $administrador = new Administrador();
-    
-            $todosLosPedidos = $administrador->mostrarPedidos();
-    
-            require_once "./views/mostrarPedidos.php";
-        } else {
-            $id = "";
-            echo "Error, no se ha encontrado el producto";
-        }
-    }
-
-    public function iniciarModificarCesta()
-    {
 
 
-        if (isset($_GET['id_cesta'])) {
-            $id = $_GET['id_cesta'];
-
-            require_once "./models/cesta.php";
-
-            $cesta = new Cesta();
-            $cesta->setIdCesta($id);
-            $cesta->conectar();
-            $cesta->fetchCesta();
-            require_once "./views/modificarCesta.php";
-
-            require_once "./models/administrador.php";
-
-          
-        } else {
-            $id = "";
-            echo "Error, no se ha encontrado el producto";
-        }
-    }
 
     public function eliminarProducto()
     {

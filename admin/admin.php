@@ -18,6 +18,7 @@ require_once "../views/general/cabecera.html";
 require_once "./views/menu.php";
 if (isset($_GET['controller'])){
     $nombreController = $_GET['controller']."Controller";
+
 }
 else{
     //Controlador per defecte

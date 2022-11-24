@@ -17,7 +17,7 @@
 
         echo "<li> <a href= \"admin.php?controller=Administrador&action=iniciarVistaProductos\" >Mostrar productes</a></li>";
         echo "<li> <a href= \"admin.php?controller=Administrador&action=iniciarVistaCategorias\" >Mostrar categories</a></li>";
-        echo "<li> <a href= \"admin.php?controller=Administrador&action=iniciarVistaPedidos\" >Mostrar pedidos</a></li>";
+        echo "<li> <a href= \"admin.php?controller=Pedido&action=iniciarVistaPedidos\" >Mostrar pedidos</a></li>";
         echo "<li> <a href= \"admin.php?controller=Administrador&action=cerrarSesion\"> Cerrar sessió </a></li>";
     } else {
         echo '<li> <a href="/botiga/index.php">Volver</a></li>';

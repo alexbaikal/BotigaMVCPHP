@@ -21,8 +21,8 @@
       echo "<tr>";
       echo "<td>".$producto['id_producto']."</td>";
       echo "<td>". $producto['cantidad'] . "</td>";
-      //echo "<td><a href='?controller=Administrador&action=eliminarProducto&id=".$producto['id_producto']."'>Eliminar</a></td>";
-      echo "<td><a href='?controller=Administrador&action=iniciarModificarProducto&id=".$producto['id_producto']."'>Modificar</a></td>";
+      echo "<td><a href='?controller=Cesta&action=eliminarProducto&id=".$producto['id_producto']."'>Eliminar</a></td>";
+      echo "<td><a href='?controller=Cesta&action=iniciarModificarProducto&id=".$producto['id_producto']."'>Modificar</a></td>";
    
       //create a checkbox form to change the active status of the product
       echo "<form action='?controller=Administrador&action=activarProducto' method='post'>";

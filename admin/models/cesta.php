@@ -75,7 +75,7 @@ class Cesta extends Database
 
     function fetchCesta() {
         $sql = "SELECT * FROM cestas WHERE id_cesta = ".$this->id_cesta;
-        echo "idcesta:".$this->id_cesta;
+        echo "Nº cesta: ".$this->id_cesta;
         $result = $this->db->query($sql);
         $row = $result->fetch(PDO::FETCH_ASSOC);
         $this->fk_id_usuario = $row['fk_id_usuario'];
@@ -94,6 +94,21 @@ class Cesta extends Database
             return "Categoria desactivada: ".$this->id_categoria."<br/>";
         }
        
+    }
+
+
+    function mostrarPedidos()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM pedidos");
+
+        $pedidos = array();
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $pedidos[] = $row;
+            }
+        }
+
+        return $pedidos;
     }
 
 }

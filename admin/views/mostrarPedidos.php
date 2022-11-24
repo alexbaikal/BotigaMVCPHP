@@ -3,7 +3,7 @@
 
 <?php
 if ($_SESSION['role'] == 'admin') {
-    echo "<a href='admin.php?controller=Administrador&action=iniciarAltaPedido' class='btn btn-primary'>Añadir pedido</a>";
+    echo "<a href='admin.php?controller=Pedido&action=iniciarAltaPedido' class='btn btn-primary'>Añadir pedido</a>";
     echo "<table border='1'>";
     echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de pedidos</p>";
     echo "<table border='1'>";
@@ -26,8 +26,9 @@ if ($_SESSION['role'] == 'admin') {
         echo "<td>" . $pedidos->getNombreUsuario($pedido['fk_id_usuario']) . "</td>";
         echo "<td>" . $pedido['num_seguimiento'] . "</td>";
         echo "<td>" . $pedido['estado'] . "</td>";
+        echo "<td>" . $pedido['fecha'] . "</td>";
         //echo "<td><a href='?controller=Administrador&action=eliminadPedido&id_pedido=" . $pedido['id_pedido'] . "'>Eliminar</a><br/>";
-        echo "<td><a href='?controller=Administrador&action=iniciarModificarPedido&id_pedido=" . $pedido['id_pedido'] . "'>Modificar</a></td>";
+        echo "<td><a href='?controller=Pedido&action=iniciarModificarPedido&id_pedido=" . $pedido['id_pedido'] . "'>Modificar</a></td>";
         echo "</tr>";
     }
     echo "</table>";
