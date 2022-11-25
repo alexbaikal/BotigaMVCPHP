@@ -63,7 +63,23 @@ class Usuario extends Database {
         $this->db->query("SET NAMES 'utf8'");
     }
 
-    
+    function mostrarProductos()
+    {
+        // prepare the statement. the placeholders allow PDO to handle substituting
+        // the values, which also prevents SQL injection
+        $stmt = $this->db->prepare("SELECT * FROM productos");
+
+        
+        $products = array();
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $products[] = $row;
+            }
+        }
+
+
+        return $products;
+    }
 }
 
 

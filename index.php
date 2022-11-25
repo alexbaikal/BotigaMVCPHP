@@ -34,6 +34,11 @@ if (class_exists($nombreController)){
         $action = $_GET['action'];
     }
     else{
+        require_once "./models/usuario.php";
+        require_once "./models/product.php";
+        $usuario = new Usuario();
+
+        $todosLosProductos = $usuario->mostrarProductos();
         $action ="mostrarTodos";
     }
     $controlador->$action();   

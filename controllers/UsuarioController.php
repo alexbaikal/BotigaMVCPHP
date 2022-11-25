@@ -3,10 +3,12 @@ class UsuarioController{
     //El controller tiene las diferentes acciones que se pueden hacer 
     public function mostrarTodos(){
        
-       require_once "models/usuario.php";
+        require_once "./models/usuario.php";
+        require_once "./models/product.php";
         $usuario = new Usuario();
-        $todosLosUsuarios = $usuario->mostrarTodos();
-        
+
+        $todosLosProductos = $usuario->mostrarProductos();
+       
         require_once "views/usuarios/mostrarTodos.php";
     }
     public function registrar(){
