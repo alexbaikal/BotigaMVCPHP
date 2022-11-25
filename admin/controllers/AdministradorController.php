@@ -8,11 +8,12 @@ class AdministradorController
     public function iniciarVistaProductos()
     {
 
-        require_once "./models/administrador.php";
         require_once "./models/product.php";
-        $administrador = new Administrador();
+        $producto = new Product();
 
-        $todosLosProductos = $administrador->mostrarProductos();
+        $producto->conectar();
+
+        $todosLosProductos = $producto->mostrarProductos();
 
         require_once "./views/mostrarProductos.php";
     }

@@ -24,6 +24,24 @@ class CestaController {
             echo "Error, no se ha encontrado el producto";
         }
     }
+
+
+    public function iniciarAltaProductoCesta()
+    {
+        require_once "./models/product.php";
+        $producto = new Product();
+
+        $producto->conectar();
+
+        $todosLosProductos = $producto->mostrarProductos();
+
+
+        
+        require_once "./views/altaProductoCesta.php";
+
+        
+    }
+
 }
 
 ?>
