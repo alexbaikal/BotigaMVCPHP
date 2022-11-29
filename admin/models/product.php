@@ -11,6 +11,10 @@ class Product extends Database
     private $foto;
     private $isactive;
 
+    //en caso de añadir producto a la cesta
+    private $id_cesta;
+    private $cantidad_cesta;
+
     /*
     public function setProduct(int $id_producto, string $nombre, string $descripcion, int $cantidad, float $precio, int $categoria, string $foto) {
         $this->id_producto = $id_producto;
@@ -61,6 +65,14 @@ class Product extends Database
     {
         return $this->isactive;
     }
+    function getIdCesta()
+    {
+        return $this->id_cesta;
+    }
+    function getCantidadCesta()
+    {
+        return $this->cantidadCesta;
+    }
 
     function setIdProducto($id_producto)
     {
@@ -100,6 +112,14 @@ class Product extends Database
     function setIsActive($isactive)
     {
         $this->isactive = $isactive;
+    }
+    function setIdCesta($id_cesta)
+    {
+        $this->id_cesta = $id_cesta;
+    }
+    function setCantidadCesta($cantidad_cesta)
+    {
+        $this->cantidad_cesta = $cantidad_cesta;
     }
 
 
@@ -163,33 +183,45 @@ class Product extends Database
         // prepare the statement. the placeholders allow PDO to handle substituting
         // the values, which also prevents SQL injection
         $stmt = $this->db->prepare("SELECT * FROM productos");
-        //create a stmt that queries all the product ids from pedidos>fk_id_cesta>id_producto
-        $stmt2 = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta IN (SELECT fk_id_cesta FROM pedidos WHERE fk_id_cesta = " . $_GET['id_cesta'] . ")");
 
-        // execute the statement
-        $stmt2->execute();
 
-        $lista_productos = array();
-        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $lista_productos = $row2['lista_productos'];
+        if (isset($_GET['id_cesta'])) {
+            //create a stmt that queries all the product ids from pedidos>fk_id_cesta>id_producto
+            $stmt2 = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta IN (SELECT fk_id_cesta FROM pedidos WHERE fk_id_cesta = "  . $_GET['id_cesta'] . ")");
+
+            // execute the statement
+            $stmt2->execute();
+
+            $lista_productos = array();
+            while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                $lista_productos = $row2['lista_productos'];
+            }
+
+
+
+            //transform lista_productos (which is a json) into an array
+
+            $lista_productos = json_decode($lista_productos, true);
         }
-
-        //echo lista_productos
-        echo $lista_productos;
-
-        //transform lista_productos (which is a json) into an array
-
-        $lista_productos = json_decode($lista_productos, true);
-
-        //echo lista_productos array
-
-        print_r($lista_productos);
 
 
         $products = array();
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $products[] = $row;
+            }
+        }
+
+        //remove all the products inside products array where id_producto from lista_productos array is equal to id_producto from products array
+
+
+        if (isset($_GET['id_cesta'])) {
+            foreach ($products as $key => $product) {
+                foreach ($lista_productos as $key2 => $lista_producto) {
+                    if ($product['id_producto'] == $lista_producto['id_producto']) {
+                        unset($products[$key]);
+                    }
+                }
             }
         }
 

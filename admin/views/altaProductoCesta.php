@@ -6,7 +6,6 @@
   //add product button
   if ($_SESSION['role'] == 'admin') {
   
-  echo "<a href='admin.php?controller=Administrador&action=iniciarAltaProducto' class='btn btn-primary'>Añadir producto</a>";
  
 
    echo "<table border='1'>";
@@ -32,25 +31,16 @@
       echo "<td>".$producto['precio'] . "</td>";
       echo "<td>".$producto['categoria'] . "</td>";
       echo "<td><img src='".$producto['foto']."' width='100' height='100'/></td>";
-      //echo "<td><a href='?controller=Administrador&action=eliminarProducto&id=".$producto['id_producto']."'>Eliminar</a></td>";
-      echo "<td><a href='?controller=Administrador&action=iniciarModificarProducto&id=".$producto['id_producto']."'>Modificar</a></td>";
+      //create a form with a hidden id field and a hidden id cesta field, quantity number field with a max of producto['cantidad'] and a submit button with action to añadirProductoCesta
       echo "<td>";
-      if ($producto['isactive'] == 1) {
-        echo "<p>Activo</p>";
-      } else {
-        echo "<p>Inactivo</p>";
-      }
-      //create a checkbox form to change the active status of the product
-      echo "<form action='?controller=Administrador&action=activarProducto' method='post'>";
+      echo "<form action='?controller=Cesta&action=añadirProductoCesta' method='POST'>";
       echo "<input type='hidden' name='id_producto' value='".$producto['id_producto']."'>";
-      echo "<input type='checkbox' onChange='this.form.submit()' name='isactive' ";
-      if ($producto['isactive'] == 1) {
-        echo "checked";
-      } else {
-        echo "";
-      }
-      echo ">";
+      echo "<input type='hidden' name='id_cesta' value='".$_GET['id_cesta']."'>";
+      echo "<input type='number' name='cantidad' min='1' max='".$producto['cantidad_cesta']."'>";
+      echo "<input type='submit' value='Añadir'>";
       echo "</form>";
+      echo "</form>";
+      echo "</td>";
       echo "</tr>";
   }
     echo "</table>";
