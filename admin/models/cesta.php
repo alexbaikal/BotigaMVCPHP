@@ -6,6 +6,7 @@ class Cesta extends Database
     private $fk_id_usuario;
     private $lista_productos;
     private $precio_total;
+    private $id_producto;
 
     function getIdCesta()
     {
@@ -22,6 +23,10 @@ class Cesta extends Database
     function getPrecioTotal()
     {
         return $this->precio_total;
+    }
+    function getIdProducto()
+    {
+        return $this->id_producto;
     }
 
 
@@ -40,6 +45,10 @@ class Cesta extends Database
     function setPrecioTotal($precio_total)
     {
         $this->precio_total = $precio_total;
+    }
+    function setIdProducto($id_producto)
+    {
+        $this->id_producto = $id_producto;
     }
 
 

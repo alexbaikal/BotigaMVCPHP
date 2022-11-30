@@ -258,28 +258,37 @@ class Product extends Database
         }
     }
 
-    function añadirProductoCesta() {
-        //get a list of all the products in json format
-        $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =". $this->id_cesta);
-        $stmt->execute();
-        //decode the json into an array
-        $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
-        //add the new product to the array, the array looks something like this: [{"id_producto":1,"cantidad":2},{"id_producto":2,"...
-        $producto_array = array("id_producto" => $this->id_producto, "cantidad" => $this->cantidad_cesta);
-        array_push($lista_productos, $producto_array);
-        //encode the array into json
-        $lista_productos = json_encode($lista_productos);
-        //update the database
-        $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
-        
-        $this->db->query($sql);
+    function añadirProductoCesta()
+    {
+        if ($this->cantidad_cesta >= 0 || $this->cantidad_cesta == "" || $this->cantidad_cesta == null) {
+            //get a list of all the products in json format
+            $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =" . $this->id_cesta);
+            $stmt->execute();
+            //decode the json into an array
+            $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
+            //add the new product to the array, the array looks something like this: [{"id_producto":1,"cantidad":2},{"id_producto":2,"...
+            $producto_array = array("id_producto" => $this->id_producto, "cantidad" => $this->cantidad_cesta);
+            array_push($lista_productos, $producto_array);
+            //encode the array into json
+            $lista_productos = json_encode($lista_productos);
+            //update the database
+            $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
 
-        return "Producto añadido a la cesta: " . $this->id_producto . "<br/>";
+            $this->db->query($sql);
+
+            //redirect page to Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta
+            header("Location: admin.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
+
+            return "Producto añadido a la cesta: " . $this->id_producto . "<br/>";
+        } else {
+            return "No se ha podido añadir el producto a la cesta: " . $this->id_producto . "<br/>";
+        }
     }
 
-    function eliminarProductoCesta() {
+    function eliminarProductoCesta()
+    {
         //get a list of all the products in json format
-        $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =". $this->id_cesta);
+        $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =" . $this->id_cesta);
         $stmt->execute();
         //decode the json into an array
         $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
@@ -293,8 +302,9 @@ class Product extends Database
         $lista_productos = json_encode($lista_productos);
         //update the database
         $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
-        
+
         $this->db->query($sql);
+
 
         return "Producto eliminado de la cesta: " . $this->id_producto . "<br/>";
     }

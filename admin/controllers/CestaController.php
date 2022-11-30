@@ -104,6 +104,33 @@ class CestaController {
         }
     }
 
+    public function iniciarModificarProducto()
+    {
+
+
+        if (isset($_GET['id_cesta'])) {
+            $id = $_GET['id_cesta'];
+            $id_producto = $_GET['id_producto'];
+
+            require_once "./models/cesta.php";
+
+            $cesta = new Cesta();
+            $cesta->setIdCesta($id);
+            $cesta->setIdProducto($id_producto);
+            $cesta->conectar();
+            $cesta->fetchCesta();
+            require_once "./views/modificarProductoCesta.php";
+
+            require_once "./models/administrador.php";
+
+          
+        } else {
+            $id = "";
+            echo "Error, no se ha encontrado el producto";
+        }
+    }
+
+
 }
 
 ?>
