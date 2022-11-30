@@ -257,4 +257,45 @@ class Product extends Database
             return "Producto desactivado: " . $this->id_producto . "<br/>";
         }
     }
+
+    function añadirProductoCesta() {
+        //get a list of all the products in json format
+        $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =". $this->id_cesta);
+        $stmt->execute();
+        //decode the json into an array
+        $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
+        //add the new product to the array, the array looks something like this: [{"id_producto":1,"cantidad":2},{"id_producto":2,"...
+        $producto_array = array("id_producto" => $this->id_producto, "cantidad" => $this->cantidad_cesta);
+        array_push($lista_productos, $producto_array);
+        //encode the array into json
+        $lista_productos = json_encode($lista_productos);
+        //update the database
+        $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
+        
+        $this->db->query($sql);
+
+        return "Producto añadido a la cesta: " . $this->id_producto . "<br/>";
+    }
+
+    function eliminarProductoCesta() {
+        //get a list of all the products in json format
+        $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =". $this->id_cesta);
+        $stmt->execute();
+        //decode the json into an array
+        $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
+        //remove the product from the array
+        foreach ($lista_productos as $key => $lista_producto) {
+            if ($lista_producto['id_producto'] == $this->id_producto) {
+                unset($lista_productos[$key]);
+            }
+        }
+        //encode the array into json
+        $lista_productos = json_encode($lista_productos);
+        //update the database
+        $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
+        
+        $this->db->query($sql);
+
+        return "Producto eliminado de la cesta: " . $this->id_producto . "<br/>";
+    }
 }

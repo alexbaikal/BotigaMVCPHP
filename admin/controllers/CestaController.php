@@ -53,15 +53,48 @@ class CestaController {
             require_once "./models/product.php";
             $producto = new Product();
             $producto->setIdProducto($id_producto);
+            $producto->setIdCesta($id_cesta);
+            $producto->setCantidadCesta($cantidad_cesta);
             $producto->conectar();
-            $producto->fetchProduct();
+            $producto->añadirProductoCesta();
+
+          
+
+    
+    
+    
+            $todosLosProductos = $producto->mostrarProductos();
+    
+    
+            
+            require_once "./views/altaProductoCesta.php";
+    
+            
+
+        } else {
+            echo "Error, no se ha encontrado el producto";
+        }
+        
+    }
+
+    public function eliminarProducto() {
+        if (isset($_GET['id_producto'])) {
+            $id_producto = $_GET['id_producto'];
+            $id_cesta = $_GET['id_cesta'];
+
+            require_once "./models/product.php";
+            $producto = new Product();
+            $producto->setIdProducto($id_producto);
+            $producto->setIdCesta($id_cesta);
+            $producto->conectar();
+            $producto->eliminarProductoCesta();
 
             require_once "./models/cesta.php";
+
             $cesta = new Cesta();
             $cesta->setIdCesta($id_cesta);
             $cesta->conectar();
             $cesta->fetchCesta();
-
             require_once "./views/modificarCesta.php";
 
             require_once "./models/administrador.php";
@@ -69,7 +102,6 @@ class CestaController {
         } else {
             echo "Error, no se ha encontrado el producto";
         }
-        
     }
 
 }

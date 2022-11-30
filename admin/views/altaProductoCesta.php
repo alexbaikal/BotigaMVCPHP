@@ -36,7 +36,7 @@
       echo "<form action='?controller=Cesta&action=añadirProductoCesta' method='POST'>";
       echo "<input type='hidden' name='id_producto' value='".$producto['id_producto']."'>";
       echo "<input type='hidden' name='id_cesta' value='".$_GET['id_cesta']."'>";
-      echo "<input type='number' name='cantidad' min='1' max='".$producto['cantidad_cesta']."'>";
+      echo "<input type='number' name='cantidad_cesta' min='1' max='".$producto['cantidad']."'>";
       echo "<input type='submit' value='Añadir'>";
       echo "</form>";
       echo "</form>";
@@ -44,6 +44,9 @@
       echo "</tr>";
   }
     echo "</table>";
+
+    //create button to go back to modify cesta
+    echo "<button onclick='window.location.href=\"?controller=Cesta&action=iniciarModificarCesta&id_cesta=".$_GET['id_cesta']."\"'>Volver</button>";
 } else {
   echo "<p>Debes ser administrador para ver esta pagina</p>";
   //refresh after 3 seconds
