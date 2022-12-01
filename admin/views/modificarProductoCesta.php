@@ -1,22 +1,21 @@
 <h2>Modificar producto</h2>
 
 
-<form action="admin.php?controller=Cesta&action=modificarCesta" method="post">
+<form action="admin.php?controller=Cesta&action=modificarProductoCesta" method="post">
 
     <input type="hidden" name="id_cesta" value="<?php echo $cesta->getIdCesta(); ?>">
 
 
-    Usuario:
-    <input type="text" name="fk_id_usuario" value="<?php echo $cesta->getFkIdUsuario() ?>">
+    Nombre:
+    <input type="text" name="id_producto" value="<?php echo $cesta->getIdProducto() ?>">
     <br />
 
-    Precio total:
-    <input type="text" name="precio_total" value="<?php echo $cesta->getPrecioTotal() ?>">
+    Cantidad:
+    <input type="text" name="cantidad" value="<?php echo $cantidad ?>">
     <br />
 
 
     <input type="submit" value="Modificar">
-
 
     <?php
 

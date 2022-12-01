@@ -7,6 +7,7 @@ class Cesta extends Database
     private $lista_productos;
     private $precio_total;
     private $id_producto;
+    private $cantidad_producto_cesta;
 
     function getIdCesta()
     {
@@ -27,6 +28,19 @@ class Cesta extends Database
     function getIdProducto()
     {
         return $this->id_producto;
+    }
+    function getCantidadProductoCesta()
+    {
+        //get json encoded products in getListaProductos() and decode it
+        $todosLosProductosCesta = json_decode($this->getListaProductos(), true);
+   
+        //get the quantity of the product in the basket
+        foreach ($todosLosProductosCesta as $producto) {
+            if ($producto['id_producto'] == $this->getIdProducto()) {
+                $this->cantidad_producto_cesta = $producto['cantidad'];
+                return $producto['cantidad'];
+            }
+        }
     }
 
 
@@ -50,7 +64,10 @@ class Cesta extends Database
     {
         $this->id_producto = $id_producto;
     }
-
+    function setCantidadProductoCesta($cantidad_producto_cesta)
+    {
+        $this->cantidad_producto_cesta = $cantidad_producto_cesta;
+    }
 
 
     function conectar()
@@ -118,6 +135,20 @@ class Cesta extends Database
         }
 
         return $pedidos;
+    }
+
+    function modificarProductoCesta() {
+        //get json encoded products in getListaProductos() and decode it
+        $todosLosProductosCesta = json_decode($this->getListaProductos(), true);
+   
+      
+        //modify the quantity of the product in the basket
+        $todosLosProductosCesta[$this->getIdProducto()]['cantidad'] = $this->cantidad_producto_cesta;
+        //encode the array to json
+        $this->setListaProductos(json_encode($todosLosProductosCesta));
+        //update the basket
+        $sql = "UPDATE cestas SET lista_productos = '".$this->getListaProductos()."' WHERE id_cesta = ".$this->getIdCesta();
+        $this->db->query($sql);
     }
 
     

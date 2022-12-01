@@ -77,7 +77,7 @@ class CestaController {
         
     }
 
-    public function eliminarProducto() {
+    public function eliminarProductoCesta() {
         if (isset($_GET['id_producto'])) {
             $id_producto = $_GET['id_producto'];
             $id_cesta = $_GET['id_cesta'];
@@ -104,21 +104,22 @@ class CestaController {
         }
     }
 
-    public function iniciarModificarProducto()
+    public function iniciarModificarProductoCesta()
     {
 
 
         if (isset($_GET['id_cesta'])) {
-            $id = $_GET['id_cesta'];
+            $id_cesta = $_GET['id_cesta'];
             $id_producto = $_GET['id_producto'];
 
             require_once "./models/cesta.php";
 
             $cesta = new Cesta();
-            $cesta->setIdCesta($id);
+            $cesta->setIdCesta($id_cesta);
             $cesta->setIdProducto($id_producto);
             $cesta->conectar();
             $cesta->fetchCesta();
+            $cantidad = $cesta->getCantidadProductoCesta();
             require_once "./views/modificarProductoCesta.php";
 
             require_once "./models/administrador.php";
@@ -129,6 +130,36 @@ class CestaController {
             echo "Error, no se ha encontrado el producto";
         }
     }
+
+    public function modificarProductoCesta() {
+        if (isset($_POST['id_cesta'])) {
+            $id_cesta = $_POST['id_cesta'];
+            $id_producto = $_POST['id_producto'];
+            $cantidad = $_POST['cantidad'];
+
+            require_once "./models/cesta.php";
+            $cesta = new Cesta();
+            $cesta->setIdCesta($id_cesta);
+            $cesta->setIdProducto($id_producto);
+            $cesta->setCantidadProductoCesta($cantidad);
+            $cesta->conectar();
+            $cesta->fetchCesta();
+            $cesta->modificarProductoCesta();
+
+            require_once "./models/cesta.php";
+
+            $cesta = new Cesta();
+            $cesta->setIdCesta($id_cesta);
+            $cesta->conectar();
+            $cesta->fetchCesta();
+            require_once "./views/modificarCesta.php";
+
+            require_once "./models/administrador.php";
+
+        } else {
+            echo "Error, no se ha encontrado el producto";
+        }
+    }       
 
 
 }
