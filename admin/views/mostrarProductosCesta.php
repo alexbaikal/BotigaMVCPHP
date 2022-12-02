@@ -19,6 +19,8 @@
     echo "</tr>";
     foreach ($todosLosProductosCesta as $producto) {
       echo "<tr>";
+      //get nombre from productos where id_producto = id_producto
+      echo "<td>". $producto['nombre'] . "</td>";
       echo "<td>".$producto['fk_id_producto']."</td>";
       echo "<td>". $producto['cantidad'] . "</td>";
       echo "<td><a href='?controller=Cesta&action=eliminarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."'>Eliminar</a></td>";
