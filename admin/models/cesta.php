@@ -31,16 +31,7 @@ class Cesta extends Database
     }
     function getCantidadProductoCesta()
     {
-        //get json encoded products in getListaProductos() and decode it
-        $todosLosProductosCesta = json_decode($this->getListaProductos(), true);
-   
-        //get the quantity of the product in the basket
-        foreach ($todosLosProductosCesta as $producto) {
-            if ($producto['id_producto'] == $this->getIdProducto()) {
-                $this->cantidad_producto_cesta = $producto['cantidad'];
-                return $producto['cantidad'];
-            }
-        }
+        return $this->cantidad_producto_cesta;
     }
 
 
@@ -101,12 +92,17 @@ class Cesta extends Database
 
     function fetchCesta() {
         $sql = "SELECT * FROM cestas WHERE id_cesta = ".$this->id_cesta;
+        
         echo "Nº cesta: ".$this->id_cesta;
         $result = $this->db->query($sql);
         $row = $result->fetch(PDO::FETCH_ASSOC);
         $this->fk_id_usuario = $row['fk_id_usuario'];
-        $this->lista_productos = $row['lista_productos'];
         $this->precio_total = $row['precio_total'];
+
+        //get result from cesta_productos and put them to lista_productos
+        $sql = "SELECT * FROM cesta_productos WHERE fk_id_cesta = ".$this->id_cesta;
+        $result = $this->db->query($sql);
+        $this->lista_productos = $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function activarCategoria() {
@@ -138,16 +134,11 @@ class Cesta extends Database
     }
 
     function modificarProductoCesta() {
-        //get json encoded products in getListaProductos() and decode it
-        $todosLosProductosCesta = json_decode($this->getListaProductos(), true);
-   
-      
+     
         //modify the quantity of the product in the basket
-        $todosLosProductosCesta[$this->getIdProducto()]['cantidad'] = $this->cantidad_producto_cesta;
-        //encode the array to json
-        $this->setListaProductos(json_encode($todosLosProductosCesta));
-        //update the basket
-        $sql = "UPDATE cestas SET lista_productos = '".$this->getListaProductos()."' WHERE id_cesta = ".$this->getIdCesta();
+        echo "suchka".$this->cantidad_producto_cesta;
+        $sql = "UPDATE cesta_productos SET cantidad = ".$this->cantidad_producto_cesta." WHERE fk_id_cesta = ".$this->id_cesta." AND fk_id_producto = ".$this->id_producto;
+      
         $this->db->query($sql);
     }
 

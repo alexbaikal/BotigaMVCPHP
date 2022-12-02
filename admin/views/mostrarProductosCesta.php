@@ -19,14 +19,14 @@
     echo "</tr>";
     foreach ($todosLosProductosCesta as $producto) {
       echo "<tr>";
-      echo "<td>".$producto['id_producto']."</td>";
+      echo "<td>".$producto['fk_id_producto']."</td>";
       echo "<td>". $producto['cantidad'] . "</td>";
-      echo "<td><a href='?controller=Cesta&action=eliminarProductoCesta&id_producto=".$producto['id_producto']."&id_cesta=".$cesta->getIdCesta()."'>Eliminar</a></td>";
-      echo "<td><a href='?controller=Cesta&action=iniciarModificarProductoCesta&id_producto=".$producto['id_producto']."&id_cesta=".$cesta->getIdCesta()."'>Modificar</a></td>";
+      echo "<td><a href='?controller=Cesta&action=eliminarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."'>Eliminar</a></td>";
+      echo "<td><a href='?controller=Cesta&action=iniciarModificarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."&cantidad=".$producto['cantidad']."'>Modificar</a></td>";
    
       //create a checkbox form to change the active status of the product
       echo "<form action='?controller=Administrador&action=activarProducto' method='post'>";
-      echo "<input type='hidden' name='id_producto' value='".$producto['id_producto']."'>";
+      echo "<input type='hidden' name='fk_id_producto' value='".$producto['fk_id_producto']."'>";
     
       echo "</form>";
       echo "</tr>";

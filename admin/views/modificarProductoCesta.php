@@ -11,7 +11,7 @@
     <br />
 
     Cantidad:
-    <input type="text" name="cantidad" value="<?php echo $cantidad ?>">
+    <input type="text" name="cantidad" value="<?php echo $cesta->getCantidadProductoCesta() ?>">
     <br />
 
 
@@ -20,7 +20,7 @@
     <?php
 
     //get json encoded products in getListaProductos() and decode it
-    $todosLosProductosCesta = json_decode($cesta->getListaProductos(), true);
+    $todosLosProductosCesta = $cesta->getListaProductos();
 
     require_once "./views/mostrarProductosCesta.php";
 

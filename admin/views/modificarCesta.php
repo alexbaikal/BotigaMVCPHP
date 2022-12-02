@@ -20,8 +20,8 @@
 
     <?php
 
-    //get json encoded products in getListaProductos() and decode it
-    $todosLosProductosCesta = json_decode($cesta->getListaProductos(), true);
+    //get products in getListaProductos()
+    $todosLosProductosCesta = $cesta->getListaProductos();
 
     require_once "./views/mostrarProductosCesta.php";
 

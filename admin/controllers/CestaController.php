@@ -78,9 +78,9 @@ class CestaController {
     }
 
     public function eliminarProductoCesta() {
-        if (isset($_GET['id_producto'])) {
-            $id_producto = $_GET['id_producto'];
-            $id_cesta = $_GET['id_cesta'];
+        if (isset($_GET['fk_id_producto'])) {
+            $id_producto = $_GET['fk_id_producto'];
+            $id_cesta = $_GET['fk_id_cesta'];
 
             require_once "./models/product.php";
             $producto = new Product();
@@ -108,15 +108,17 @@ class CestaController {
     {
 
 
-        if (isset($_GET['id_cesta'])) {
-            $id_cesta = $_GET['id_cesta'];
-            $id_producto = $_GET['id_producto'];
+        if (isset($_GET['fk_id_cesta'])) {
+            $id_cesta = $_GET['fk_id_cesta'];
+            $id_producto = $_GET['fk_id_producto'];
+            $cantidad = $_GET['cantidad'];
 
             require_once "./models/cesta.php";
 
             $cesta = new Cesta();
             $cesta->setIdCesta($id_cesta);
             $cesta->setIdProducto($id_producto);
+            $cesta->setCantidadProductoCesta($cantidad);
             $cesta->conectar();
             $cesta->fetchCesta();
             $cantidad = $cesta->getCantidadProductoCesta();
@@ -142,6 +144,7 @@ class CestaController {
             $cesta->setIdCesta($id_cesta);
             $cesta->setIdProducto($id_producto);
             $cesta->setCantidadProductoCesta($cantidad);
+            echo "suka".$cesta->getCantidadProductoCesta();
             $cesta->conectar();
             $cesta->fetchCesta();
             $cesta->modificarProductoCesta();

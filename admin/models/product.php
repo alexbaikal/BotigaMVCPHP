@@ -71,7 +71,7 @@ class Product extends Database
     }
     function getCantidadCesta()
     {
-        return $this->cantidadCesta;
+        return $this->cantidad_cesta;
     }
 
     function setIdProducto($id_producto)
@@ -274,25 +274,11 @@ class Product extends Database
 
     function eliminarProductoCesta()
     {
-        //get a list of all the products in json format
-        $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =" . $this->id_cesta);
-        $stmt->execute();
-        //decode the json into an array
-        $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
-        //remove the product from the array
-        foreach ($lista_productos as $key => $lista_producto) {
-            if ($lista_producto['id_producto'] == $this->id_producto) {
-                unset($lista_productos[$key]);
-            }
-        }
-        //encode the array into json
-        $lista_productos = json_encode($lista_productos);
-        //update the database
-        $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
-
+        $sql = "DELETE FROM cesta_productos WHERE fk_id_cesta = " . $this->id_cesta . " AND fk_id_producto = " . $this->id_producto;
         $this->db->query($sql);
 
-
+        //redirect page to Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta
+        header("Location: admin.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
         return "Producto eliminado de la cesta: " . $this->id_producto . "<br/>";
     }
 }
