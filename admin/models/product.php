@@ -186,47 +186,47 @@ class Product extends Database
 
 
         if (isset($_GET['id_cesta'])) {
-            //create a stmt that queries all the product ids from pedidos>fk_id_cesta>id_producto
-            $stmt2 = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta IN (SELECT fk_id_cesta FROM pedidos WHERE fk_id_cesta = "  . $_GET['id_cesta'] . ")");
-
-            // execute the statement
+            //create a stmt that queries all the product ids from cesta_productos table where fk_id_cesta=id_cesta
+            $stmt2 = $this->db->prepare("SELECT * FROM productos WHERE id_producto IN (SELECT fk_id_producto FROM cesta_productos WHERE fk_id_cesta=" . $_GET['id_cesta'] . ")");
             $stmt2->execute();
-
-            $lista_productos = array();
-            while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                $lista_productos = $row2['lista_productos'];
-            }
+            $cesta_productos = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            $stmt2->closeCursor();
+            $stmt2 = null;
 
 
 
-            //transform lista_productos (which is a json) into an array
 
-            $lista_productos = json_decode($lista_productos, true);
         }
 
 
-        $products = array();
-        if ($stmt->execute()) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $products[] = $row;
-            }
-        }
+        // execute the statement
+        $stmt->execute();
+
+        // fetch the results
+        $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
         //remove all the products inside products array where id_producto from lista_productos array is equal to id_producto from products array
 
 
         if (isset($_GET['id_cesta'])) {
-            foreach ($products as $key => $product) {
-                foreach ($lista_productos as $key2 => $lista_producto) {
-                    if ($product['id_producto'] == $lista_producto['id_producto']) {
-                        unset($products[$key]);
+            foreach ($productos as $key => $producto) {
+                foreach ($cesta_productos as $key2 => $cesta_producto) {
+                    if ($producto['id_producto'] == $cesta_producto['id_producto']) {
+                        unset($productos[$key]);
                     }
                 }
             }
         }
 
+        // close the cursor and free the connection
+        $stmt->closeCursor();
+        $stmt = null;
 
-        return $products;
+        // return the results
+        return $productos;
+
+
     }
 
 
@@ -261,21 +261,8 @@ class Product extends Database
     function añadirProductoCesta()
     {
         if ($this->cantidad_cesta >= 0 || $this->cantidad_cesta == "" || $this->cantidad_cesta == null) {
-            //get a list of all the products in json format
-            $stmt = $this->db->prepare("SELECT lista_productos FROM cestas WHERE id_cesta =" . $this->id_cesta);
-            $stmt->execute();
-            //decode the json into an array
-            $lista_productos = json_decode($stmt->fetch(PDO::FETCH_ASSOC)['lista_productos'], true);
-            //add the new product to the array, the array looks something like this: [{"id_producto":1,"cantidad":2},{"id_producto":2,"...
-            $producto_array = array("id_producto" => $this->id_producto, "cantidad" => $this->cantidad_cesta);
-            array_push($lista_productos, $producto_array);
-            //encode the array into json
-            $lista_productos = json_encode($lista_productos);
-            //update the database
-            $sql = "UPDATE cestas SET lista_productos = '" . $lista_productos . "' WHERE id_cesta = " . $this->id_cesta;
-
+            $sql = "INSERT INTO cesta_productos (fk_id_cesta, fk_id_producto, cantidad) VALUES (" . $this->id_cesta . ", " . $this->id_producto . ", " . $this->cantidad_cesta . ")";
             $this->db->query($sql);
-
             //redirect page to Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta
             header("Location: admin.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
 
