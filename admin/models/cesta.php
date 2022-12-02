@@ -136,7 +136,6 @@ class Cesta extends Database
     function modificarProductoCesta() {
      
         //modify the quantity of the product in the basket
-        echo "suchka".$this->cantidad_producto_cesta;
         $sql = "UPDATE cesta_productos SET cantidad = ".$this->cantidad_producto_cesta." WHERE fk_id_cesta = ".$this->id_cesta." AND fk_id_producto = ".$this->id_producto;
       
         $this->db->query($sql);

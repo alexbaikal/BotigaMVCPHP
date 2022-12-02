@@ -144,7 +144,6 @@ class CestaController {
             $cesta->setIdCesta($id_cesta);
             $cesta->setIdProducto($id_producto);
             $cesta->setCantidadProductoCesta($cantidad);
-            echo "suka".$cesta->getCantidadProductoCesta();
             $cesta->conectar();
             $cesta->fetchCesta();
             $cesta->modificarProductoCesta();
