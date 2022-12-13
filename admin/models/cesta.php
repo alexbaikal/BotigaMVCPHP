@@ -102,7 +102,19 @@ class Cesta extends Database
         //get result from cesta_productos and put them to lista_productos
         $sql = "SELECT * FROM cesta_productos WHERE fk_id_cesta = ".$this->id_cesta;
         $result = $this->db->query($sql);
-        $this->lista_productos = $result->fetchAll(PDO::FETCH_ASSOC);
+        //get fk_id_producto from result and get nombre from productos
+        for ($i = 0; $i < $result->rowCount(); $i++) {
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $id_producto = $row['fk_id_producto'];
+            $sql = "SELECT * FROM productos WHERE id_producto = " . $id_producto;
+            $result2 = $this->db->query($sql);
+            $row2 = $result2->fetch(PDO::FETCH_ASSOC);
+            $this->lista_productos[$i]['nombre'] = $row2['nombre'];
+            $this->lista_productos[$i]['fk_id_producto'] = $row2['id_producto'];
+            $this->lista_productos[$i]['cantidad'] = $row['cantidad'];
+
+        }
+
     }
 
     function activarCategoria() {

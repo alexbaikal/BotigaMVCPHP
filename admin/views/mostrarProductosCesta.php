@@ -14,9 +14,11 @@
     echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de productos</p>";
     echo "<table border='1'>";
     echo "<tr>";
-    echo "<th>Nombre</th>";
+    echo "<th>Nombre producto</th>";
+    echo "<th>Id</th>";
     echo "<th>Cantidad</th>";
     echo "</tr>";
+
     foreach ($todosLosProductosCesta as $producto) {
       echo "<tr>";
       //get nombre from productos where id_producto = id_producto

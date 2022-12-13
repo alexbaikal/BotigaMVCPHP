@@ -21,7 +21,6 @@
 
     //get json encoded products in getListaProductos() and decode it
     $todosLosProductosCesta = $cesta->getListaProductos();
-
     require_once "./views/mostrarProductosCesta.php";
 
     ?>
