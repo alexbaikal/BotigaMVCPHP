@@ -39,6 +39,7 @@ class PedidoController
             $pedido->setIdPedido($id);
             $pedido->conectar();
             $pedido->fetchPedido();
+            $transportistasArray = $pedido->getTransportistas();
             require_once "./views/modificarPedido.php";
 
             require_once "./models/cesta.php";

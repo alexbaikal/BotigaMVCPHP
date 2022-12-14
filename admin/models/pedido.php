@@ -137,6 +137,17 @@ class Pedido extends Database
         $this->fecha = $row['fecha'];
     }
 
+    function getTransportistas() {
+        //get everything from empresa_transorte using and put to an array
+        $sql = "SELECT * FROM empresa_transporte";
+        $result = $this->db->query($sql);
+        $transportistasArray = array();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $transportistasArray[] = $row;
+        }
+        return $transportistasArray;
+    }
+
     function activarCategoria() {
         if ($this->isactive == 1) {
             $sql = "UPDATE categorias SET isactive = 1 WHERE id_categoria = ".$this->id_categoria;
