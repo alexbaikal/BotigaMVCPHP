@@ -148,6 +148,14 @@ class Pedido extends Database
         return $transportistasArray;
     }
 
+    function getClientName() {
+        $sql = "SELECT nombre FROM usuarios WHERE id_usuario = ".$this->fk_id_usuario;
+        $result = $this->db->query($sql);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $nombre = $row['nombre'];
+        return $nombre;
+    }
+
     function activarCategoria() {
         if ($this->isactive == 1) {
             $sql = "UPDATE categorias SET isactive = 1 WHERE id_categoria = ".$this->id_categoria;
