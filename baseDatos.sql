@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2022 at 10:53 AM
+-- Generation Time: Dec 14, 2022 at 02:24 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -59,8 +59,8 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) VALUES
 (1, 'Zapatos', 'Replica exacta.', 1),
-(3, 'Todos', 'De todo!', 1),
-(4, 'Blusas', 'Bastante grandes ', 1);
+(2, 'Todos', 'De todo!', 1),
+(3, 'Blusas', 'Bastante grandes ', 1);
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,6 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) V
 CREATE TABLE `cestas` (
   `id_cesta` int(15) NOT NULL,
   `fk_id_usuario` int(15) NOT NULL,
-  `lista_productos` varchar(5000) NOT NULL,
   `precio_total` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -79,8 +78,48 @@ CREATE TABLE `cestas` (
 -- Dumping data for table `cestas`
 --
 
-INSERT INTO `cestas` (`id_cesta`, `fk_id_usuario`, `lista_productos`, `precio_total`) VALUES
-(1, 0, '[{\"id_producto\":1,\"cantidad\":2},{\"id_producto\":2,\"cantidad\":1},{\"id_producto\":3,\"cantidad\":3}]', 0);
+INSERT INTO `cestas` (`id_cesta`, `fk_id_usuario`, `precio_total`) VALUES
+(1, 1, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cesta_productos`
+--
+
+CREATE TABLE `cesta_productos` (
+  `fk_id_cesta` int(100) NOT NULL,
+  `fk_id_producto` int(100) NOT NULL,
+  `cantidad` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cesta_productos`
+--
+
+INSERT INTO `cesta_productos` (`fk_id_cesta`, `fk_id_producto`, `cantidad`) VALUES
+(1, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `empresa_transporte`
+--
+
+CREATE TABLE `empresa_transporte` (
+  `id_empresa_transporte` int(100) NOT NULL,
+  `nombre_empresa_transporte` varchar(256) NOT NULL,
+  `precio_empresa_transporte` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `empresa_transporte`
+--
+
+INSERT INTO `empresa_transporte` (`id_empresa_transporte`, `nombre_empresa_transporte`, `precio_empresa_transporte`) VALUES
+(1, 'DHL', 20),
+(2, 'UPS', 15),
+(3, 'Correos', 10);
 
 -- --------------------------------------------------------
 
@@ -103,7 +142,7 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `fk_id_cesta`, `fk_id_empresa_transporte`, `fk_id_usuario`, `num_seguimiento`, `estado`, `fecha`) VALUES
-(1, 1, 1, 1, 'sin seguimiento.', 0, 0);
+(1, 1, 2, 1, 'sin seguimiento.', 2, 1666787369);
 
 -- --------------------------------------------------------
 
@@ -128,7 +167,9 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `cantidad`, `precio`, `categoria`, `foto`, `isactive`) VALUES
 (1, 'Camisa', 'Buena camisa de calidad', 4, 15, 1, 'https://depor.com/resizer/BdfCWDPbdNccDG_sY-atb0ZI8nA=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/3Z2SZYXOEBCVDEOTIVIBF2ZNUE.jpg', 0),
-(2, 'Gafas', 'Accesorio gafas', 6, 2, 2, 'https://depor.com/resizer/BdfCWDPbdNccDG_sY-atb0ZI8nA=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/3Z2SZYXOEBCVDEOTIVIBF2ZNUE.jpg', 1);
+(2, 'Gafas', 'Accesorio gafas', 6, 2, 2, 'https://depor.com/resizer/BdfCWDPbdNccDG_sY-atb0ZI8nA=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/3Z2SZYXOEBCVDEOTIVIBF2ZNUE.jpg', 1),
+(11, 'Borrar', 'Producto inútil', 4, 23, 3, '', 1),
+(12, 'birara', 'asdasd', 5, 13, 1, 'https://boiab.ahe.eh/agf', 1);
 
 -- --------------------------------------------------------
 
@@ -174,20 +215,35 @@ ALTER TABLE `categorias`
 -- Indexes for table `cestas`
 --
 ALTER TABLE `cestas`
-  ADD PRIMARY KEY (`id_cesta`);
+  ADD PRIMARY KEY (`id_cesta`),
+  ADD UNIQUE KEY `Foreign key` (`fk_id_usuario`) USING BTREE;
+
+--
+-- Indexes for table `cesta_productos`
+--
+ALTER TABLE `cesta_productos`
+  ADD UNIQUE KEY `fk_id_producto` (`fk_id_producto`,`fk_id_cesta`),
+  ADD KEY `fk_id_cesta` (`fk_id_cesta`);
+
+--
+-- Indexes for table `empresa_transporte`
+--
+ALTER TABLE `empresa_transporte`
+  ADD PRIMARY KEY (`id_empresa_transporte`);
 
 --
 -- Indexes for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`id_pedido`);
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD UNIQUE KEY `Foreign keys` (`fk_id_cesta`,`fk_id_empresa_transporte`,`fk_id_usuario`);
 
 --
 -- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `categoria` (`categoria`);
+  ADD KEY `Foreign keys` (`categoria`);
 
 --
 -- Indexes for table `usuarios`
@@ -215,7 +271,13 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `cestas`
 --
 ALTER TABLE `cestas`
-  MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `empresa_transporte`
+--
+ALTER TABLE `empresa_transporte`
+  MODIFY `id_empresa_transporte` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pedidos`
@@ -227,13 +289,37 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cestas`
+--
+ALTER TABLE `cestas`
+  ADD CONSTRAINT `cestas_ibfk_1` FOREIGN KEY (`id_cesta`) REFERENCES `pedidos` (`fk_id_cesta`),
+  ADD CONSTRAINT `cestas_ibfk_2` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Constraints for table `cesta_productos`
+--
+ALTER TABLE `cesta_productos`
+  ADD CONSTRAINT `cesta_productos_ibfk_1` FOREIGN KEY (`fk_id_cesta`) REFERENCES `cestas` (`id_cesta`),
+  ADD CONSTRAINT `cesta_productos_ibfk_2` FOREIGN KEY (`fk_id_producto`) REFERENCES `productos` (`id_producto`);
+
+--
+-- Constraints for table `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
