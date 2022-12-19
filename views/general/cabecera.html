@@ -1,1 +1,28 @@
-<h1>Tienda online</h1>
+<!--Create a title on the left with h1 Tienda online and an icon on the right with -->
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <div class="col-md-12">
+                <div class="pull-left">
+                    <h1>Tienda online</h1>
+                </div>
+                <div class="pull-right">
+                    <span class="glyphicon glyphicon-shopping-cart"
+                        onclick="location.href='index.php?controller=Cesta&action=iniciarModificarCesta'"></span>
+                    <!--Create a link through php-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+
+    <style>
+        /*onhover span glyphicon*/
+        .glyphicon-shopping-cart:hover {
+            color: #FF0000;
+            cursor: pointer;
+        }
+
+    </style>

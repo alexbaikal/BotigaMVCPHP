@@ -4,19 +4,19 @@ class CestaController {
     public function iniciarModificarCesta()
     {
 
-
-        if (isset($_GET['id_cesta'])) {
-            $id = $_GET['id_cesta'];
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
 
             require_once "./models/cesta.php";
 
             $cesta = new Cesta();
-            $cesta->setIdCesta($id);
+            $cesta->setFkIdUsuario($user_id);
             $cesta->conectar();
-            $cesta->fetchCesta();
-            require_once "./views/modificarCesta.php";
 
-            require_once "./models/administrador.php";
+            $cesta->fetchCesta();
+
+            require_once "./views/usuarios/verCesta.php";
+
 
           
         } else {
