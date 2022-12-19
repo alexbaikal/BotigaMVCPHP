@@ -80,7 +80,7 @@ class AdministradorController
     public function cerrarSesion()
     {
         session_destroy();
-        header("Location: /botiga/index.php");
+        header("Location: /botigamvcphp/index.php");
     }
 
     public function iniciarAltaProducto()
