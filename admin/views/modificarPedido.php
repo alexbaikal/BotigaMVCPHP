@@ -4,9 +4,10 @@
 <h2>Modificar pedido</h2>
 
 
-<form action="admin.php?controller=Administrador&action=modificarPedido" method="post">
+<form action="admin.php?controller=Pedido&action=modificarPedido" method="post">
     
     <input type="hidden" name="id_pedido" value="<?php echo $pedido->getIdPedido(); ?>">
+    <input type="hidden" name="fk_id_usuario" value="<?php echo $pedido->getFkIdUsuario(); ?>">
 
     Cliente:
 

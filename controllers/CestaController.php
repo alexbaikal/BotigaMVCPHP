@@ -44,31 +44,33 @@ class CestaController {
     }
 
     public function añadirProductoCesta() {
-        //if POST is set
-        if (isset($_POST['id_producto'])) {
-            $id_producto = $_POST['id_producto'];
-            $id_cesta = $_POST['id_cesta'];
-            $cantidad_cesta = $_POST['cantidad_cesta'];
+        //if GET is set
+        if (isset($_GET['id_producto'])) {
+            $id_producto = $_GET['id_producto'];
 
-            require_once "./models/product.php";
-            $producto = new Product();
-            $producto->setIdProducto($id_producto);
-            $producto->setIdCesta($id_cesta);
-            $producto->setCantidadCesta($cantidad_cesta);
-            $producto->conectar();
-            $producto->añadirProductoCesta();
+            if (isset($_SESSION['role'])) {
+                require_once "./models/cesta.php";
+                $cesta = new Cesta();
+                $cesta->setFkIdUsuario($_SESSION['user_id']);
+                $cesta->setCantidadProductoCesta(1);
+                $cesta->setIdProducto($id_producto);
+                $cesta->conectar();
+                $cesta->fetchCesta();
+                $cesta->añadirProductoCesta();
 
-          
+                echo "Producto añadido a la cesta.";
+                
+                //after 3 seconds redirect to index
+                header("refresh:3;url=index.php?controller=Usuario&action=mostrarTodos");
 
-    
-    
-    
-            $todosLosProductos = $producto->mostrarProductos();
-    
-    
-            
-            require_once "./views/altaProductoCesta.php";
-    
+
+                
+            } else {
+                //por hacer
+            }
+
+
+
             
 
         } else {

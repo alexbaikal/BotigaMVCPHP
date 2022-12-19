@@ -10,6 +10,8 @@ class Pedido extends Database
     private $num_seguimiento;
     private $estado;
     private $fecha;
+    private $hora;
+    private $fecha_hora_timestamp;
 
     function getIdPedido()
     {
@@ -59,6 +61,14 @@ class Pedido extends Database
     {
         return $this->fecha;
     }
+    function getHora()
+    {
+        return $this->hora;
+    }
+    function getFechaHoraTimestamp()
+    {
+        return $this->fecha_hora_timestamp;
+    }
 
     function setIdPedido($id_pedido)
     {
@@ -93,6 +103,19 @@ class Pedido extends Database
     {
         $this->fecha = $fecha;
     }
+    function setHora($hora)
+    {
+        $this->hora = $hora;
+    }
+    function setFechaHoraTimestamp($fecha, $hora)
+    {
+        //convertir fecha y hora a timestamp
+        $fecha = strval($fecha);
+        $hora = strval($hora);
+        $fecha_hora = $fecha." ".$hora;
+        $fecha_hora_timestamp = strtotime($fecha_hora);
+        $this->fecha_hora_timestamp = $fecha_hora_timestamp;
+    }
 
 
 
@@ -101,22 +124,10 @@ class Pedido extends Database
         $this->db->query("SET NAMES 'utf8'");
     }
 
-    function insertarCategoria() {
-        $sql = "INSERT INTO pedidos (nombre, descripcion, cantidad, precio, categoria, foto, isactive) VALUES ('".$this->nombre."', '".$this->descripcion."', ".$this->cantidad.", ".$this->precio.", ".$this->categoria.", '".$this->foto."', ".$this->isactive.")";
-        $this->db->query($sql);
-        return "Categoria insertada: ".$this->nombre;
-    }
-
-    function eliminarCategoria(){
-        $sql = "DELETE FROM categorias WHERE id_categoria = ".$this->id_categoria;
-        $this->db->query($sql);
-        return "Categoria eliminada: ".$this->id_categoria."<br/>";
-    }
-
     function modificarPedido() {
-        $sql = "UPDATE pedidos SET fk_id_cesta = '".$this->fk_id_cesta."', 
+        $sql = "UPDATE pedidos SET
             fk_id_empresa_transporte = '".$this->fk_id_empresa_transporte."',
-             fk_id_usuario = ".$this->fk_id_usuario.", num_seguimiento = '".$this->num_seguimiento."', estado = ".$this->estado.", fecha = ".$this->fecha." WHERE id_pedido = ".$this->id_pedido;
+             fk_id_usuario = ".$this->fk_id_usuario.", num_seguimiento = '".$this->num_seguimiento."', estado = ".$this->estado.", fecha = ".$this->fecha_hora_timestamp." WHERE id_pedido = ".$this->id_pedido;
             $this->db->query($sql);
 
 
@@ -156,17 +167,5 @@ class Pedido extends Database
         return $nombre;
     }
 
-    function activarCategoria() {
-        if ($this->isactive == 1) {
-            $sql = "UPDATE categorias SET isactive = 1 WHERE id_categoria = ".$this->id_categoria;
-            $this->db->query($sql);
-            return "Categoria activada: ".$this->id_categoria."<br/>";
-        } else {
-            $sql = "UPDATE categorias SET isactive = 0 WHERE id_categoria = ".$this->id_categoria;
-            $this->db->query($sql);
-            return "Categoria desactivada: ".$this->id_categoria."<br/>";
-        }
-       
-    }
 
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 14, 2022 at 02:24 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Хост: 127.0.0.1
+-- Время создания: Дек 19 2022 г., 23:51
+-- Версия сервера: 10.4.24-MariaDB
+-- Версия PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `botiga`
+-- База данных: `botiga`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Структура таблицы `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Дамп данных таблицы `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorias`
+-- Структура таблицы `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -54,7 +54,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categorias`
+-- Дамп данных таблицы `categorias`
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) VALUES
@@ -65,7 +65,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cestas`
+-- Структура таблицы `cestas`
 --
 
 CREATE TABLE `cestas` (
@@ -75,16 +75,17 @@ CREATE TABLE `cestas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `cestas`
+-- Дамп данных таблицы `cestas`
 --
 
 INSERT INTO `cestas` (`id_cesta`, `fk_id_usuario`, `precio_total`) VALUES
-(1, 1, 100);
+(1, 1, 100),
+(23, 2, 25);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cesta_productos`
+-- Структура таблицы `cesta_productos`
 --
 
 CREATE TABLE `cesta_productos` (
@@ -94,16 +95,18 @@ CREATE TABLE `cesta_productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `cesta_productos`
+-- Дамп данных таблицы `cesta_productos`
 --
 
 INSERT INTO `cesta_productos` (`fk_id_cesta`, `fk_id_producto`, `cantidad`) VALUES
-(1, 1, 2);
+(1, 1, 3),
+(23, 2, 2),
+(23, 11, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `empresa_transporte`
+-- Структура таблицы `empresa_transporte`
 --
 
 CREATE TABLE `empresa_transporte` (
@@ -113,7 +116,7 @@ CREATE TABLE `empresa_transporte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `empresa_transporte`
+-- Дамп данных таблицы `empresa_transporte`
 --
 
 INSERT INTO `empresa_transporte` (`id_empresa_transporte`, `nombre_empresa_transporte`, `precio_empresa_transporte`) VALUES
@@ -124,7 +127,7 @@ INSERT INTO `empresa_transporte` (`id_empresa_transporte`, `nombre_empresa_trans
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pedidos`
+-- Структура таблицы `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -138,16 +141,16 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pedidos`
+-- Дамп данных таблицы `pedidos`
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `fk_id_cesta`, `fk_id_empresa_transporte`, `fk_id_usuario`, `num_seguimiento`, `estado`, `fecha`) VALUES
-(1, 1, 2, 1, 'sin seguimiento.', 2, 1666787369);
+(1, 1, 3, 1, 'sin seguimiento.', 2, 1671473220);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Структура таблицы `productos`
 --
 
 CREATE TABLE `productos` (
@@ -162,7 +165,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `productos`
+-- Дамп данных таблицы `productos`
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `cantidad`, `precio`, `categoria`, `foto`, `isactive`) VALUES
@@ -174,7 +177,7 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `cantidad`, `pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Структура таблицы `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -189,134 +192,134 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `usuarios`
+-- Дамп данных таблицы `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `telefono`, `contraseña`, `direccion`, `provincia`, `cp`) VALUES
-(1, 'Aleksandr', 'alexander.baikalov@inslapineda.cat', '633837566', '123456', 'Marquès de sant-mori 123', 'Barcelona', '08918');
+(1, 'Aleksandr', 'alexander.baikalov2@inslapineda.cat', '633837566', '$2y$10$gQ7XZwWjnB0S3VccmsB8xOX1ftT.G98yajlZr4dN5FsE05EC2cZ/e', 'Marquès de sant-mori 123', 'Barcelona', '08918'),
+(2, 'Aleksandr Baikalov', 'alexander.baikalov@inslapineda.cat', '6978679', '$2y$10$gQ7XZwWjnB0S3VccmsB8xOX1ftT.G98yajlZr4dN5FsE05EC2cZ/e', 'Marquès sant-mori 174 6-3', 'Badalona', '08918');
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `admin`
+-- Индексы таблицы `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indexes for table `categorias`
+-- Индексы таблицы `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indexes for table `cestas`
+-- Индексы таблицы `cestas`
 --
 ALTER TABLE `cestas`
   ADD PRIMARY KEY (`id_cesta`),
   ADD UNIQUE KEY `Foreign key` (`fk_id_usuario`) USING BTREE;
 
 --
--- Indexes for table `cesta_productos`
+-- Индексы таблицы `cesta_productos`
 --
 ALTER TABLE `cesta_productos`
   ADD UNIQUE KEY `fk_id_producto` (`fk_id_producto`,`fk_id_cesta`),
   ADD KEY `fk_id_cesta` (`fk_id_cesta`);
 
 --
--- Indexes for table `empresa_transporte`
+-- Индексы таблицы `empresa_transporte`
 --
 ALTER TABLE `empresa_transporte`
   ADD PRIMARY KEY (`id_empresa_transporte`);
 
 --
--- Indexes for table `pedidos`
+-- Индексы таблицы `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`),
   ADD UNIQUE KEY `Foreign keys` (`fk_id_cesta`,`fk_id_empresa_transporte`,`fk_id_usuario`);
 
 --
--- Indexes for table `productos`
+-- Индексы таблицы `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `Foreign keys` (`categoria`);
 
 --
--- Indexes for table `usuarios`
+-- Индексы таблицы `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT для таблицы `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `categorias`
+-- AUTO_INCREMENT для таблицы `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `cestas`
+-- AUTO_INCREMENT для таблицы `cestas`
 --
 ALTER TABLE `cestas`
-  MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `empresa_transporte`
+-- AUTO_INCREMENT для таблицы `empresa_transporte`
 --
 ALTER TABLE `empresa_transporte`
   MODIFY `id_empresa_transporte` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `pedidos`
+-- AUTO_INCREMENT для таблицы `pedidos`
 --
 ALTER TABLE `pedidos`
   MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `productos`
+-- AUTO_INCREMENT для таблицы `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT для таблицы `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Ограничения внешнего ключа сохраненных таблиц
 --
 
 --
--- Constraints for table `cestas`
+-- Ограничения внешнего ключа таблицы `cestas`
 --
 ALTER TABLE `cestas`
-  ADD CONSTRAINT `cestas_ibfk_1` FOREIGN KEY (`id_cesta`) REFERENCES `pedidos` (`fk_id_cesta`),
   ADD CONSTRAINT `cestas_ibfk_2` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
--- Constraints for table `cesta_productos`
+-- Ограничения внешнего ключа таблицы `cesta_productos`
 --
 ALTER TABLE `cesta_productos`
   ADD CONSTRAINT `cesta_productos_ibfk_1` FOREIGN KEY (`fk_id_cesta`) REFERENCES `cestas` (`id_cesta`),
   ADD CONSTRAINT `cesta_productos_ibfk_2` FOREIGN KEY (`fk_id_producto`) REFERENCES `productos` (`id_producto`);
 
 --
--- Constraints for table `productos`
+-- Ограничения внешнего ключа таблицы `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`);
