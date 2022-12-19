@@ -7,7 +7,9 @@
 
 
     Usuario:
-    <input type="text" name="fk_id_usuario" value="<?php echo $cesta->getFkIdUsuario() ?>">
+    <?php
+    echo $cesta->getNombreUsuario();
+    ?>
     <br />
 
     Precio total:

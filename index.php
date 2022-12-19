@@ -13,12 +13,23 @@
 </head>
 <body>
 <?php 
-require_once "autoload.php";
-require_once "views/general/cabecera.html";
-require_once "views/general/menu.php";
-
 // Initialize the session
 session_start();
+
+require_once "autoload.php";
+if (isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
+    $role = $_SESSION['role'];
+    require_once "./models/usuario.php";
+    $usuario = new Usuario();
+    $nombre_usuario = $usuario->getNombreUsuario($user_id);
+}
+
+require_once "views/general/cabecera.html";
+
+
+require_once "views/general/menu.php";
+
  
 
 if (isset($_GET['controller'])){

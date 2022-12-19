@@ -15,7 +15,11 @@ class PedidoController
 
         $cesta = new Cesta();
 
+
+
         $todosLosPedidos = $cesta->mostrarPedidos();
+
+        $transportistasArray = $pedidos->getTransportistas();
 
         require_once "./views/mostrarPedidos.php";
     }
@@ -71,14 +75,22 @@ class PedidoController
             $pedido->setNumSeguimiento($_POST['num_seguimiento']);
             $pedido->setEstado($_POST['estado']);
             $pedido->setFecha($_POST['fecha']);
-            
+            //$pedido->setHora($_POST['hora']);
+            //unir fecha y hora en un timestamp
+            $pedido->setFecha($_POST['fecha']);
+            $pedido->setHora($_POST['hora']);
+            $pedido->setFechaHoraTimestamp($pedido->getFecha(), $pedido->getHora());
 
+  
             $pedido->conectar();
 
             echo "" . $pedido->modificarPedido();
 
 
             require_once "./models/cesta.php";
+
+            $pedidos = new Pedido();
+
             $cesta = new Cesta();
 
             $todosLosPedidos = $cesta->mostrarPedidos();
