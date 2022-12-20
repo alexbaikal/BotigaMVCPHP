@@ -82,6 +82,7 @@ class Cesta extends Database
 
 
     function fetchCesta() {
+        $this->id_cesta = $_GET['id_cesta'];
         $sql = "SELECT * FROM cestas WHERE id_cesta = ".$this->id_cesta;
         
         $result = $this->db->query($sql);

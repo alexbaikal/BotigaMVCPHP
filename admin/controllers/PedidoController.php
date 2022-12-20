@@ -58,7 +58,7 @@ class PedidoController
             require_once "./views/mostrarPedidos.php";
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 

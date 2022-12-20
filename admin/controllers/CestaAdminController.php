@@ -1,6 +1,6 @@
 <?php
 
-class CestaController {
+class CestaAdminController {
     public function iniciarModificarCesta()
     {
 
@@ -21,7 +21,7 @@ class CestaController {
           
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
@@ -72,7 +72,7 @@ class CestaController {
             
 
         } else {
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
         
     }
@@ -100,7 +100,7 @@ class CestaController {
             require_once "./models/administrador.php";
 
         } else {
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
@@ -129,7 +129,7 @@ class CestaController {
           
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
@@ -159,7 +159,7 @@ class CestaController {
             require_once "./models/administrador.php";
 
         } else {
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }    
     

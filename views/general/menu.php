@@ -16,3 +16,10 @@ else {
     <li> <a href= "admin/admin.php">Panel Admin</a></li>
     <li> <a href= "index.php?controller=Usuario&action=mostrarTodos" >Volver </a></li>
 </ul>
+
+<!--Get all categories-->
+<?php
+//require_once "../../../../models/category.php";
+
+//$category = new Category();
+?>

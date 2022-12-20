@@ -21,7 +21,7 @@ class CestaController {
           
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
