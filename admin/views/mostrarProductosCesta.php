@@ -11,7 +11,7 @@
    echo "<table border='1'>";
   
   
-    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de productos</p>";
+    echo "<p>Productos dentro de cesta</p>";
     echo "<table border='1'>";
     echo "<tr>";
     echo "<th>Nombre producto</th>";

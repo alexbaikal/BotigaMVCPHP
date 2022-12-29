@@ -195,4 +195,25 @@ class CestaController
             require_once "./views/modificarCesta.php";
         }
     }
+    function confirmarCompra() {
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+
+            require_once "./models/cesta.php";
+
+            $cesta = new Cesta();
+            $cesta->setFkIdUsuario($user_id);
+            $cesta->conectar();
+
+            $cesta->fetchCesta();
+
+            require_once "./views/usuarios/verCheckout.php";
+        } else {
+            //por hacer
+            echo "Hay que estar autentificado primero.";
+
+            //after 3 seconds redirect to index
+            header("refresh:1;url=index.php?controller=Usuario&action=mostrarTodos");
+        }
+    }
 }

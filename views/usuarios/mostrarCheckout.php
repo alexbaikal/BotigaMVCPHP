@@ -11,7 +11,7 @@
    echo "<table border='1'>";
   
   
-    echo "<p>Productos a comprar:</p>";
+    echo "<p>Productes a demanar: </p>";
     echo "<table border='1'>";
     echo "<tr>";
     echo "<th>Nombre producto</th>";
@@ -24,8 +24,6 @@
         //get nombre from productos where id_producto = id_producto
         echo "<td>". $producto['nombre'] . "</td>";
         echo "<td>". $producto['cantidad'] . "</td>";
-        echo "<td><a href='?controller=Cesta&action=eliminarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."&cantidad=".$producto['cantidad']."'>Eliminar</a></td>";
-        echo "<td><a href='?controller=Cesta&action=iniciarModificarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."&cantidad=".$producto['cantidad']."'>Modificar</a></td>";
      
         //create a checkbox form to change the active status of the product
         echo "<form action='?controller=Administrador&action=activarProducto' method='post'>";

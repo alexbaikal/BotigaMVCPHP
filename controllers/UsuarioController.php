@@ -4,7 +4,6 @@ class UsuarioController{
     public function mostrarTodos(){
        
         require_once "./models/usuario.php";
-        require_once "./models/product.php";
         $usuario = new Usuario();
 
 
@@ -13,6 +12,29 @@ class UsuarioController{
         
        
         require_once "views/usuarios/mostrarTodos.php";
+    }
+
+    public function mostrarCategoria() {
+        if ($_GET['id_categoria'] == 1) {
+            $this->mostrarTodos();
+        } else {
+            require_once "./models/usuario.php";
+            $usuario = new Usuario();
+            $categoria = $_GET['id_categoria'];
+            $productos = $usuario->mostrarProductos();
+            $todasLasCategorias = $usuario->getCategorias();
+
+            //filter producto['categoria'] by categoria
+            $todosLosProductos = array();
+            foreach ($productos as $producto) {
+                if ($producto['categoria'] == $categoria) {
+                    array_push($todosLosProductos, $producto);
+                }
+            }
+            
+
+            require_once "views/usuarios/mostrarTodos.php";
+        }
     }
     public function registrarUsuario(){
         require_once "views/usuarios/registrarUsuario.php";

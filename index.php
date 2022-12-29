@@ -28,6 +28,12 @@ if (isset($_SESSION['user_id'])){
 
 require_once "views/general/cabecera.html";
 
+require_once 'models/category.php';
+
+$category = new Category();
+
+$category->conectar();
+$categorias = $category->mostrarCategorias();
 
 require_once "views/general/menu.php";
 
