@@ -1,5 +1,5 @@
 <?php
-require_once("models/database.php");
+require_once("../models/database.php");
 class Category extends Database
 {
     private $id_categoria;
@@ -63,23 +63,7 @@ class Category extends Database
         $this->isactive = $isactive;
     }
 
-    function mostrarCategorias()
-    {
-        // prepare the statement. the placeholders allow PDO to handle substituting
-        // the values, which also prevents SQL injection
-        $stmt = $this->db->prepare("SELECT * FROM categorias");
 
-        
-        $categories = array();
-        if ($stmt->execute()) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $categories[] = $row;
-            }
-        }
-
-
-        return $categories;
-    }
 
     function conectar()
     {

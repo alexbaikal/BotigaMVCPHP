@@ -121,7 +121,7 @@ class Administrador extends Database
 
                 //get lastInsertId and set it to session and set session role to admin
                 $publisher_id = $this->db->lastInsertId();
-                $_SESSION['id_user'] = $publisher_id;
+                $_SESSION['user_id'] = $publisher_id;
                 $_SESSION['role'] = "admin";
                 return $result;
             } else {

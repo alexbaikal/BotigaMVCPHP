@@ -6,7 +6,7 @@
   //add product button
   if ($_SESSION['role'] == 'admin') {
   
-  echo "<a href='admin.php?controller=Cesta&action=iniciarAltaProductoCesta&id_cesta=".$cesta->getIdCesta()."' class='btn btn-primary'>Añadir producto a la cesta</a>";
+  echo "<a href='admin.php?Admin&action=iniciarAltaProductoCesta&id_cesta=".$cesta->getIdCesta()."' class='btn btn-primary'>Añadir producto a la cesta</a>";
 
    echo "<table border='1'>";
   
@@ -26,8 +26,8 @@
       echo "<td>". $producto['nombre'] . "</td>";
       echo "<td>".$producto['fk_id_producto']."</td>";
       echo "<td>". $producto['cantidad'] . "</td>";
-      echo "<td><a href='?controller=Cesta&action=eliminarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."'>Eliminar</a></td>";
-      echo "<td><a href='?controller=Cesta&action=iniciarModificarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."&cantidad=".$producto['cantidad']."'>Modificar</a></td>";
+      echo "<td><a href='?controller=CestaAdmin&action=eliminarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."'>Eliminar</a></td>";
+      echo "<td><a href='?controller=CestaAdmin&action=iniciarModificarProductoCesta&fk_id_producto=".$producto['fk_id_producto']."&fk_id_cesta=".$cesta->getIdCesta()."&cantidad=".$producto['cantidad']."'>Modificar</a></td>";
    
       //create a checkbox form to change the active status of the product
       echo "<form action='?controller=Administrador&action=activarProducto' method='post'>";
