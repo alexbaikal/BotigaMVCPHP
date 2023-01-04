@@ -5,7 +5,7 @@
   if ($_SESSION['role'] == 'admin') {
     echo "<a href='admin.php?controller=Administrador&action=iniciarAltaCategoria' class='btn btn-primary'>Afegir categoria</a>";
     echo "<table border='1'>";
-    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de categorias</p>";
+    echo "<p>Categorías:</p>";
     echo "<table border='1'>";
     echo "<tr>";
     echo "<th>Id</th>";

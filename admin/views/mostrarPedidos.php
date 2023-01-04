@@ -5,7 +5,7 @@
 if ($_SESSION['role'] == 'admin') {
     echo "<a href='admin.php?controller=Pedido&action=iniciarAltaPedido' class='btn btn-primary'>Añadir pedido</a>";
     echo "<table border='1'>";
-    echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de pedidos</p>";
+    echo "<p>Lista de pedidos:</p>";
     echo "<table border='1'>";
     echo "<tr>";
     echo "<th>Id</th>";

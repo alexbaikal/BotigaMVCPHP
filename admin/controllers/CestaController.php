@@ -14,9 +14,9 @@ class CestaController {
             $cesta->setIdCesta($id);
             $cesta->conectar();
             $cesta->fetchCesta();
+
             require_once "./views/modificarCesta.php";
 
-            require_once "./models/administrador.php";
 
           
         } else {
@@ -84,6 +84,7 @@ class CestaController {
 
             require_once "./models/product.php";
             $producto = new Product();
+
             $producto->setIdProducto($id_producto);
             $producto->setIdCesta($id_cesta);
             $producto->conectar();

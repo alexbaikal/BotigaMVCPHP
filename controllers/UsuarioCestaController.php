@@ -1,27 +1,28 @@
 <?php
 
-class CestaController {
+class UsuarioCestaController
+{
     public function iniciarModificarCesta()
     {
 
-
-        if (isset($_GET['id_cesta'])) {
-            $id = $_GET['id_cesta'];
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
 
             require_once "./models/cesta.php";
 
             $cesta = new Cesta();
-            $cesta->setIdCesta($id);
+            $cesta->setFkIdUsuario($user_id);
             $cesta->conectar();
+
             $cesta->fetchCesta();
-            require_once "./views/modificarCesta.php";
 
-            require_once "./models/administrador.php";
-
-          
+            require_once "./views/usuarios/verCesta.php";
         } else {
-            $id = "";
-            echo "Error, no se ha encontrado el producto";
+            //por hacer
+            echo "Hay que estar autentificado primero.";
+
+            //after 3 seconds redirect to index
+            header("refresh:1;url=index.php?controller=Usuario&action=mostrarTodos");
         }
     }
 
@@ -37,57 +38,61 @@ class CestaController {
         $todosLosProductos = $producto->mostrarProductos();
 
 
-        
-        require_once "./views/altaProductoCesta.php";
 
-        
+        require_once "./views/altaProductoCesta.php";
     }
 
-    public function añadirProductoCesta() {
+    public function añadirProductoCesta()
+    {
         //if GET is set
-        if (isset($_GET['id_producto'])) {
+        if (isset($_POST)) {
             $id_producto = $_GET['id_producto'];
+            $cantidad_producto = $_POST['cantidad'];
 
             if (isset($_SESSION['role'])) {
-                require_once "./models/cesta.php";
-                $cesta = new Cesta();
-                $cesta->setFkIdUsuario($_SESSION['user_id']);
-                $cesta->setCantidadProductoCesta(1);
-                $cesta->setIdProducto($id_producto);
-                $cesta->conectar();
-                $cesta->fetchCesta();
-                $cesta->añadirProductoCesta();
-
-                echo "Producto añadido a la cesta.";
-                
-                //after 3 seconds redirect to index
-                header("refresh:3;url=index.php?controller=Usuario&action=mostrarTodos");
-
-
-                
+                if ($cantidad_producto > 0 ) {
+                    require_once "./models/cesta.php";
+                    $cesta = new Cesta();
+                    $cesta->setFkIdUsuario($_SESSION['user_id']);
+                    $cesta->setCantidadProductoCesta($cantidad_producto);
+                    $cesta->setIdProducto($id_producto);
+                    $cesta->conectar();
+                    $cesta->fetchCesta();
+                    $cesta->añadirProductoCesta();
+    
+                    echo "Producto añadido a la cesta.";
+    
+                    //after 3 seconds redirect to index
+                    header("refresh:1;url=index.php?controller=Usuario&action=mostrarTodos");
+                } else {
+                    echo "La cantidad debe ser mayor que 0";
+                    header("refresh:1;url=index.php?controller=Usuario&action=mostrarTodos");
+                }
+               
             } else {
                 //por hacer
+                echo "Hay que estar autentificado primero.";
+
+                //after 3 seconds redirect to index
+                header("refresh:2;url=index.php?controller=Usuario&action=mostrarTodos");
             }
-
-
-
-            
-
         } else {
             echo "Error, no se ha encontrado el producto";
         }
-        
     }
 
-    public function eliminarProductoCesta() {
+    public function eliminarProductoCesta()
+    {
         if (isset($_GET['fk_id_producto'])) {
             $id_producto = $_GET['fk_id_producto'];
             $id_cesta = $_GET['fk_id_cesta'];
+            $cantidad_producto_cesta = $_GET['cantidad'];
 
             require_once "./models/product.php";
             $producto = new Product();
             $producto->setIdProducto($id_producto);
             $producto->setIdCesta($id_cesta);
+            $producto->setCantidadProductoCesta($cantidad_producto_cesta);
             $producto->conectar();
             $producto->eliminarProductoCesta();
 
@@ -100,7 +105,6 @@ class CestaController {
             require_once "./views/modificarCesta.php";
 
             require_once "./models/administrador.php";
-
         } else {
             echo "Error, no se ha encontrado el producto";
         }
@@ -114,6 +118,7 @@ class CestaController {
             $id_cesta = $_GET['fk_id_cesta'];
             $id_producto = $_GET['fk_id_producto'];
             $cantidad = $_GET['cantidad'];
+            $id_usuario = $_SESSION['user_id'];
 
             require_once "./models/cesta.php";
 
@@ -121,31 +126,32 @@ class CestaController {
             $cesta->setIdCesta($id_cesta);
             $cesta->setIdProducto($id_producto);
             $cesta->setCantidadProductoCesta($cantidad);
+            $cesta->setFkIdUsuario($id_usuario);
+            $cesta->setProductoNombre($id_producto);
             $cesta->conectar();
             $cesta->fetchCesta();
             $cantidad = $cesta->getCantidadProductoCesta();
-            require_once "./views/modificarProductoCesta.php";
-
-            require_once "./models/administrador.php";
-
-          
+            require_once "./views/usuarios/modificarProductoCesta.php";
         } else {
             $id = "";
             echo "Error, no se ha encontrado el producto";
         }
     }
 
-    public function modificarProductoCesta() {
+    public function modificarProductoCesta()
+    {
         if (isset($_POST['id_cesta'])) {
             $id_cesta = $_POST['id_cesta'];
             $id_producto = $_POST['id_producto'];
             $cantidad = $_POST['cantidad'];
+            $id_usuario = $_SESSION['user_id'];
 
             require_once "./models/cesta.php";
             $cesta = new Cesta();
             $cesta->setIdCesta($id_cesta);
             $cesta->setIdProducto($id_producto);
             $cesta->setCantidadProductoCesta($cantidad);
+            $cesta->setFkIdUsuario($id_usuario);
             $cesta->conectar();
             $cesta->fetchCesta();
             $cesta->modificarProductoCesta();
@@ -155,17 +161,20 @@ class CestaController {
             $cesta = new Cesta();
             $cesta->setIdCesta($id_cesta);
             $cesta->conectar();
+            $cesta->setFkIdUsuario($id_usuario);
             $cesta->fetchCesta();
-            require_once "./views/modificarCesta.php";
+            require_once "./views/usuarios/verCesta.php";
 
-            require_once "./models/administrador.php";
 
+
+            
         } else {
             echo "Error, no se ha encontrado el producto";
         }
-    }    
-    
-    function modificarCesta() {
+    }
+
+    function modificarCesta()
+    {
         if (isset($_POST['id_cesta'])) {
             $precio_total = $_POST['precio_total'];
             $id_cesta = $_POST['id_cesta'];
@@ -184,15 +193,27 @@ class CestaController {
             $cesta->conectar();
             $cesta->fetchCesta();
             require_once "./views/modificarCesta.php";
-
-
-
-
         }
-
     }
+    function confirmarCompra() {
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
 
+            require_once "./models/cesta.php";
 
+            $cesta = new Cesta();
+            $cesta->setFkIdUsuario($user_id);
+            $cesta->conectar();
+
+            $cesta->fetchCesta();
+
+            require_once "./views/usuarios/verCheckout.php";
+        } else {
+            //por hacer
+            echo "Hay que estar autentificado primero.";
+
+            //after 3 seconds redirect to index
+            header("refresh:1;url=index.php?controller=Usuario&action=mostrarTodos");
+        }
+    }
 }
-
-?>

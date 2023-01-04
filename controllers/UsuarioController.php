@@ -4,7 +4,6 @@ class UsuarioController{
     public function mostrarTodos(){
        
         require_once "./models/usuario.php";
-        require_once "./models/product.php";
         $usuario = new Usuario();
 
 
@@ -13,6 +12,29 @@ class UsuarioController{
         
        
         require_once "views/usuarios/mostrarTodos.php";
+    }
+
+    public function mostrarCategoria() {
+        if ($_GET['id_categoria'] == 1) {
+            $this->mostrarTodos();
+        } else {
+            require_once "./models/usuario.php";
+            $usuario = new Usuario();
+            $categoria = $_GET['id_categoria'];
+            $productos = $usuario->mostrarProductos();
+            $todasLasCategorias = $usuario->getCategorias();
+
+            //filter producto['categoria'] by categoria
+            $todosLosProductos = array();
+            foreach ($productos as $producto) {
+                if ($producto['categoria'] == $categoria) {
+                    array_push($todosLosProductos, $producto);
+                }
+            }
+            
+
+            require_once "views/usuarios/mostrarTodos.php";
+        }
     }
     public function registrarUsuario(){
         require_once "views/usuarios/registrarUsuario.php";
@@ -141,6 +163,36 @@ class UsuarioController{
     public function eliminar(){
         echo "Estoy en eliminar";
     }  
+
+    public function iniciarModificarUsuario() {
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+            require_once "models/usuario.php";
+            $usuario = new Usuario();
+            $usuario->setUserId($user_id);
+            $usuario->conectar();
+            $usuario->mostrarUsuario();
+        } else {
+            echo "No se ha recibido el id del usuario";
+        }
+    }
+
+    //get user data from $_POST and update the database
+    function modificarUsuario() {
+        if (isset($_POST)) {
+            require_once "models/usuario.php";
+            $usuario = new Usuario();
+            $usuario->setUsername($_POST['nombre']);
+            $usuario->setPhone($_POST['telefono']);
+            $usuario->setAddress($_POST['direccion']);
+            $usuario->setProvince($_POST['provincia']);
+            $usuario->setCp($_POST['cp']);
+            $usuario->setUserId($_POST['user_id']);
+            $usuario->conectar();
+
+            $usuario->modificarUsuario();
+            }
+    }
 
 }
 ?>

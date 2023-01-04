@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <title>Document</title>
 </head>
@@ -27,6 +28,13 @@ if (isset($_SESSION['user_id'])){
 
 require_once "views/general/cabecera.html";
 
+require_once 'models/category.php';
+
+$category = new Category();
+//$administrador = new Administrador();
+
+$category->conectar();
+$categorias = $category->mostrarCategorias();
 
 require_once "views/general/menu.php";
 

@@ -80,7 +80,7 @@ class AdministradorController
     public function cerrarSesion()
     {
         session_destroy();
-        header("Location: /botiga/index.php");
+        header("Location: /botigamvcphp/index.php");
     }
 
     public function iniciarAltaProducto()
@@ -265,7 +265,7 @@ class AdministradorController
             require_once "./views/mostrarProductos.php";
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
@@ -293,7 +293,7 @@ class AdministradorController
             require_once "./views/mostrarCategorias.php";
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
@@ -321,7 +321,7 @@ class AdministradorController
             require_once "./views/mostrarProductos.php";
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
@@ -346,7 +346,7 @@ class AdministradorController
             require_once "./views/mostrarCategorias.php";
         } else {
             $id = "";
-            echo "Error, no se ha encontrado el producto";
+            echo "Error, no se ha encontrado el producto!";
         }
     }
 
