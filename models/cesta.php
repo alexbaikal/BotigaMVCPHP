@@ -84,7 +84,6 @@ class Cesta extends Database
         return $this->nombre_producto;
     }
 
-
     function conectar()
     {
         $this->db->query("SET NAMES 'utf8'");

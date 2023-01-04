@@ -199,7 +199,7 @@ class Product extends Database
         $this->db->query($sql2);
 
         //redirect page to Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta
-        header("Location: index.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
+        header("Location: index.php?controller=UsuarioCesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
         return "Producto eliminado de la cesta: " . $this->id_producto . "<br/>";
     }
 

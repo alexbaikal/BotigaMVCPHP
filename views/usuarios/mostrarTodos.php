@@ -48,7 +48,7 @@ if (isset($_POST['search'])) {
 foreach ($todosLosProductos as $producto) {
   //if ($producto['isactive'] == 1) {
   //create a form where there is a number input with max value = cantidad afegir a la cistella button
-  echo "<form action='?controller=Cesta&action=añadirProductoCesta&id_producto=" . $producto['id_producto'] . "' method='post'>";
+  echo "<form action='?controller=UsuarioCesta&action=añadirProductoCesta&id_producto=" . $producto['id_producto'] . "' method='post'>";
   //echo "<input type='hidden' name='fk_id_producto' value='".$producto['id_producto']."'>";
 
 
@@ -78,6 +78,14 @@ foreach ($todosLosProductos as $producto) {
 
 }
 echo "</table>";
+
+
+
+
+
+
+
+
 
 
 ?>

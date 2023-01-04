@@ -19,6 +19,7 @@
     echo "<th>Cantidad</th>";
     echo "</tr>";
 
+  if (isset($todosLosProductosCesta)) {
     foreach ($todosLosProductosCesta as $producto) {
       echo "<tr>";
       //get nombre from productos where id_producto = id_producto
@@ -34,6 +35,11 @@
     
       echo "</form>";
       echo "</tr>";
+  }
+  } else {
+
+    echo "<p>No hay productos en la cesta</p>";
+
   }
     echo "</table>";
 } else {

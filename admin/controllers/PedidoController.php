@@ -94,6 +94,8 @@ class PedidoController
             $cesta = new Cesta();
 
             $todosLosPedidos = $cesta->mostrarPedidos();
+            $transportistasArray = $pedidos->getTransportistas();
+
 
             require_once "./views/mostrarPedidos.php";
 

@@ -6,7 +6,7 @@
   //add product button
   if (isset($_SESSION['role'])) {
   
-  //echo "<a href='admin.php?controller=Cesta&action=iniciarAltaProductoCesta&id_cesta=".$cesta->getIdCesta()."' class='btn btn-primary'>Añadir producto a la cesta</a>";
+  //echo "<a href='admin.php?controller=UsuarioCesta&action=iniciarAltaProductoCesta&id_cesta=".$cesta->getIdCesta()."' class='btn btn-primary'>Añadir producto a la cesta</a>";
 
    echo "<table border='1'>";
   

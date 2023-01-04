@@ -40,7 +40,7 @@ $transportistasArray = $pedido->getTransportistas();
 //check if $todosLosProductosCesta is not empty, then show button to confirm purchase
 if (!empty($todosLosProductosCesta)) {
     echo "<br/>";
-    echo "<form action='?controller=Pedido&action=generateCheckout' method='post'>";
+    echo "<form action='?controller=UsuarioPedido&action=generateCheckout' method='post'>";
 
 
 

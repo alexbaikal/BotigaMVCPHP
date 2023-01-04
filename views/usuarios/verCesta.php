@@ -27,7 +27,7 @@
     //check if $todosLosProductosCesta is not empty, then show button to confirm purchase
     if (!empty($todosLosProductosCesta)) {
         echo "<br/>";
-      echo "<form action='?controller=Cesta&action=confirmarCompra' method='post'>";
+      echo "<form action='?controller=UsuarioCesta&action=confirmarCompra' method='post'>";
       echo "<input type='submit' value='Check out'>";
       echo "</form>";
     }
