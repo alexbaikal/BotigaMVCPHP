@@ -24,18 +24,6 @@ echo "<input type='submit' value='Buscar'>";
 echo "</form>";
 echo "<br/><br/>";
 
-echo "<table border='1'>";
-echo "<tr>";
-//echo "<th>Id</th>";
-echo "<th>Nombre</th>";
-echo "<th>Descripcion</th>";
-echo "<th>Cantitat disp.</th>";
-echo "<th>Cantitat</th>";
-echo "<th>Precio</th>";
-echo "<th>Categoria</th>";
-echo "<th>Imagen</th>";
-echo "</tr>";
-
 if (isset($_POST['search'])) {
   $search = $_POST['search'];
   //filtrate $producto['nombre'] with $search (each to lower case)
@@ -45,47 +33,97 @@ if (isset($_POST['search'])) {
 }
 
 
-foreach ($todosLosProductos as $producto) {
-  //if ($producto['isactive'] == 1) {
-  //create a form where there is a number input with max value = cantidad afegir a la cistella button
-  echo "<form action='?controller=UsuarioCesta&action=añadirProductoCesta&id_producto=" . $producto['id_producto'] . "' method='post'>";
-  //echo "<input type='hidden' name='fk_id_producto' value='".$producto['id_producto']."'>";
-
-
-  echo "<tr>";
-  //echo "<td>".$producto['id_producto']."</td>";
-  echo "<td>" . $producto['nombre'] . "</td>";
-  echo "<td>" . $producto['descripcion'] . "</td>";
-  echo "<td>" . $producto['cantidad'] . "</td>";
-  //number input inside td
-  echo "<td><input type='number' name='cantidad' min='1' max='" . $producto['cantidad'] . "'></td>";
-  echo "<td>" . $producto['precio'] . "€</td>";
-  //poner nombre categoria donde id_categoria coincida
-
-  foreach ($todasLasCategorias as $categoria) {
-    if ($categoria['id_categoria'] == $producto['categoria']) {
-      echo "<td>" . $categoria['nombre'] . "</td>";
-    }
-  }
-
-  echo "<td><img src='" . $producto['foto'] . "' width='100' height='100'/></td>";
-  //post form button inside td
-  echo "<td><input type='submit' value='Afegir a la cistella'></td>";
-
-  echo "</tr>";
-  echo "</form>";
-  // }
-
-}
-echo "</table>";
-
-
-
-
-
-
-
 
 
 
 ?>
+
+
+
+<div class="grid">
+  <?php
+  foreach ($todosLosProductos as $producto) {
+    echo "<div class='item'>";
+    //poner nombre categoria donde id_categoria coincida
+
+  foreach ($todasLasCategorias as $categoria) {
+    if ($categoria['id_categoria'] == $producto['categoria']) {
+      echo "<p id='categoria'>" . $categoria['nombre'] . "</p>";
+    }
+  }
+    echo "<img src='" . $producto['foto'] . "' width='100' height='100'/>";
+    echo "<p><b>".$producto['nombre']."</b></p>";
+    echo "<p>".$producto['descripcion']."</p>";
+    //stock
+    echo "<p id='stock'>Stock: ".$producto['cantidad']."</p>";
+    echo "<div class='row'>";
+    echo "<div class='col-sm-2'>";
+    echo "<p id='precio'>".$producto['precio']."€</p>";
+    echo "</div>";
+    echo "<div class='col-sm-60'>";
+    echo "<form action='?controller=UsuarioCesta&action=añadirProductoCesta&id_producto=" . $producto['id_producto'] . "' method='post'>";
+    echo "<input type='number' value='1' name='cantidad' min='1' max='" . $producto['cantidad'] . "'>";
+    echo "<input type='submit' value='Afegir'>";
+    echo "</form>";
+
+    echo "</div>";
+
+    echo "</div>";
+    echo "</div>";
+  }
+  ?>
+ 
+</div>
+
+
+<style>
+  .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+.item {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  /*grid is column oriented*/
+  grid-column: span 1;
+  /*set maximum width of 200px*/
+  max-width: 250px;
+}
+#categoria {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(123, 65, 111, 0.5);;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px 0 0 0;
+}
+#precio {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(155, 255, 100, 1);
+  color: #567;
+  padding: 5px;
+  border-radius: 0 0 0 10px;
+}
+#stock {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(255, 100, 100, 1);
+  color: #567;
+  padding: 5px;
+  border-radius: 0 0 10px 0;
+}
+/*Stock overlaps the form, to solve: */
+.item form {
+  position: relative;
+  z-index: 1;
+}
+</style>
