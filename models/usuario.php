@@ -10,6 +10,7 @@ class Usuario extends Database {
     private $province;
     private $cp;
     private $fecha;
+    private $user_id;
     function getUsername() {
         return $this->username;
     }
@@ -60,6 +61,9 @@ class Usuario extends Database {
     function getCp() {
         return $this->cp;
     }
+    function getUserId() {
+        return $this->user_id;
+    }
 
     function setUsername($username) {
         $this->username = $username;
@@ -67,6 +71,7 @@ class Usuario extends Database {
     function getFecha() {
         return $this->fecha;
     }
+   
     function setApellidos($apellidos) {
         $this->apellidos = $apellidos;
     }
@@ -97,6 +102,9 @@ class Usuario extends Database {
     
     function setFecha($fecha) {
         $this->fecha = $fecha;
+    }
+    function setUserId($user_id) {
+        $this->user_id = $user_id;
     }
     function mostrarTodos(){
         //$sql = "SELECT * FROM usuarios";
@@ -174,6 +182,41 @@ class Usuario extends Database {
 
 
         return $filtered_products;
+    }
+
+    function mostrarUsuario()
+    {
+        // prepare the statement. the placeholders allow PDO to handle substituting
+        // the values, which also prevents SQL injection
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario = ?");
+
+        
+        $user_data = array();
+        if ($stmt->execute(array($this->user_id))) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $user_data[] = $row;
+            }
+        }
+        //echo direccion of user
+
+
+        require_once "views/usuarios/modificarUsuario.php";
+
+
+
+    }
+
+    function modificarUsuario() {
+        $sql = "UPDATE usuarios SET nombre = ?, telefono = ?, direccion = ?, provincia = ?, cp = ? WHERE id_usuario = ?";
+            $statement = $this->db->prepare($sql);
+            $statement->execute(array($this->username, $this->phone, $this->address, $this->province, $this->cp, $this->user_id));
+            
+            //echo "Usuario modificado correctamente" and show the user data
+            echo "Usuario modificado correctamente";
+
+            //after 1 second, redirect to the user page
+            header("refresh:0.1; url=index.php?controller=Usuario&action=iniciarModificarUsuario");
+        
     }
 }
 

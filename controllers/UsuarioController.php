@@ -164,5 +164,35 @@ class UsuarioController{
         echo "Estoy en eliminar";
     }  
 
+    public function iniciarModificarUsuario() {
+        if (isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+            require_once "models/usuario.php";
+            $usuario = new Usuario();
+            $usuario->setUserId($user_id);
+            $usuario->conectar();
+            $usuario->mostrarUsuario();
+        } else {
+            echo "No se ha recibido el id del usuario";
+        }
+    }
+
+    //get user data from $_POST and update the database
+    function modificarUsuario() {
+        if (isset($_POST)) {
+            require_once "models/usuario.php";
+            $usuario = new Usuario();
+            $usuario->setUsername($_POST['nombre']);
+            $usuario->setPhone($_POST['telefono']);
+            $usuario->setAddress($_POST['direccion']);
+            $usuario->setProvince($_POST['provincia']);
+            $usuario->setCp($_POST['cp']);
+            $usuario->setUserId($_POST['user_id']);
+            $usuario->conectar();
+
+            $usuario->modificarUsuario();
+            }
+    }
+
 }
 ?>

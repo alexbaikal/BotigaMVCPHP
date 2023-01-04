@@ -202,6 +202,10 @@ class Pedido extends Database
             $this->db->query($sql);
         }
         
+        //to select a git branch:
+        //git checkout -b <branch_name>
+        //if it says that a branch already exists:
+        //git checkout <branch_name>
 
         //delete all rows from cesta_productos where id_cesta = $this->fk_id_cesta
         $sql = "DELETE FROM cesta_productos WHERE fk_id_cesta = ".$this->fk_id_cesta;

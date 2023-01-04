@@ -9,7 +9,12 @@
                 <div class="pull-right">
                     <span class="glyphicon glyphicon-shopping-cart"
                         onclick="location.href='index.php?controller=Cesta&action=iniciarModificarCesta'"></span>
-                    <!--Create a link through php-->
+                        <!--Account icon-->
+                    <span class="glyphicon glyphicon-user"
+                        onclick="location.href='index.php?controller=Usuario&action=iniciarModificarUsuario'"></span>
+                    <!--Orders icon-->
+                    <span class="glyphicon glyphicon-list-alt"
+                        onclick="location.href='index.php?controller=Pedido&action=iniciarMostrarPedidos'"></span>
                 </div>
 
             </div>
@@ -20,7 +25,7 @@
 
     <style>
         /*onhover span glyphicon*/
-        .glyphicon-shopping-cart:hover {
+        .glyphicon:hover {
             color: #FF0000;
             cursor: pointer;
         }

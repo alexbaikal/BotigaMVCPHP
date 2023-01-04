@@ -129,6 +129,21 @@ class PedidoController
             
         }
     }
+
+    public function iniciarMostrarPedidos() {
+    
+        require_once "./models/cesta.php";
+        require_once "./models/pedido.php";
+        $cesta = new Cesta();
+        $cesta->conectar();
+        $pedido = new Pedido();
+        $cesta->setFkIdUsuario($_SESSION['user_id']);
+
+        //transportistasArray
+        $transportistasArray = $pedido->getTransportistas();
+        $todosLosPedidos = $cesta->mostrarPedidos();
+        require_once "./views/usuarios/mostrarPedidos.php";
+    }
 }
 
 ?>

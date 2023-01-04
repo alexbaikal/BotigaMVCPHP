@@ -191,7 +191,7 @@ class Cesta extends Database
 
     function mostrarPedidos()
     {
-        $stmt = $this->db->prepare("SELECT * FROM pedidos");
+        $stmt = $this->db->prepare("SELECT * FROM pedidos WHERE fk_id_usuario = " . $this->fk_id_usuario . " ORDER BY fecha DESC");
 
         $pedidos = array();
         if ($stmt->execute()) {
