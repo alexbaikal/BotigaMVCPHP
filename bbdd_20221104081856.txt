@@ -1,0 +1,52 @@
+Lista de tablas de la bdd:
+
+id admin
+usuario
+contraseña.
+
+
+
+
+productos
+id_producto
+nombre
+cantidad (restar cantidad en relacion a los productos que hay). limitar la cantidad de productos que se pueden pedir, si es 0 entonces no se puede reservar).
+descricpion
+empresa FK de empresa_mensajera*
+precio
+categoria
+foto
+
+
+
+
+Pedidos
+id_pedido
+fk_id_usuario
+fk_id_cesta
+fk_id_empresa_transporte
+num_seguimiento
+estado (0; sin enviar, 1; enviado, 2; transportista o 3; recibido)
+fecha
+
+*
+usuarios:
+id_usuario
+nombre
+correo
+numero
+contraseña
+direccion
+provincia
+cp
+*
+empresa_transporte:
+id_empresa
+nombre
+precio/producto
+*
+cesta:
+id_cesta
+fk_id_usuario
+lista_productos
+precio_total
