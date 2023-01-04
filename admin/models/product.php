@@ -165,7 +165,7 @@ class Product extends Database
 
         echo "<div style='display: flex; justify-content: center; margin-bottom: 20px; align-items:center;'>";
         echo "<form action='adminCourses.php' method='GET'>";
-        echo "<input type='text' name='search' placeholder='Cerca per nom del curs o DNI'>";
+        echo "<input type='text' name='search' placeholder='Cerca per nom del producte o id'>";
         echo "<input type='submit' value='🔎'>";
         echo "</form>";
         echo "</div>";
