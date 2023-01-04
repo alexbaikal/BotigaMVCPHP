@@ -1,8 +1,8 @@
-<h2>Login admin</h2>
-<form action="admin.php?controller=Administrador&action=login" method="post">
-    Usuario:
-    <input type="text" name = "username">
-    Contraseña:
-    <input type="password" name = "password">    
-    <input type = "submit" value="Iniciar sesión">
+<h2 id="tituloadminlog">Login admin</h2>
+<form action="admin.php?controller=Administrador&action=login" method="post" id="formlogadmin">
+
+    <input class="logadmin" type="text" name = "username" placeholder="Usuario">
+    
+    <input class="logadmin" type="password" name = "password" placeholder="Contraseña">    
+    <input id="logadminenviar" type = "submit" value="Iniciar sesión">
 </form>

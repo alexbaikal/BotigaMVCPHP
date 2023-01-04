@@ -1,26 +1,26 @@
-<h2>Registrar un usuario nuevo</h2>
-<form action="index.php?controller=Usuario&action=alta" method="post">
+<h2 id="tituloregistro">Registrar un usuario nuevo</h2>
+<form action="index.php?controller=Usuario&action=alta" method="post" id="formregistro">
     <!--Nombre, correo, teléfono, contraseña, dirección, provincia, cp-->
-    Nombre y apellidos:
-    <input type="text" name = "nombre">
+    
+    <input class="regist" type="text" name = "nombre" placeholder="Nombre y apellidos">
     <br>
-    Correo:
-    <input type="text" name = "correo">
+    
+    <input class="regist" type="text" name = "correo" placeholder="Correo">
     <br>
-    Teléfono:
-    <input type="text" name = "telefono">
+    
+    <input class="regist" type="text" name = "telefono" placeholder="Teléfono">
     <br>
-    Contraseña:
-    <input type="text" name = "contrasena">
+    
+    <input class="regist" type="text" name = "contrasena" placeholder="Contraseña">
     <br>
-    Dirección:
-    <input type="text" name = "direccion">
+    
+    <input class="regist" type="text" name = "direccion" placeholder="Dirección">
     <br>
-    Provincia:
-    <input type="text" name = "provincia">
+    
+    <input class="regist" type="text" name = "provincia" placeholder="Provincia">
     <br>
-    Código postal:
-    <input type="text" name = "cp">  
+    
+    <input class="regist" type="text" name = "cp" placeholder="Código postal">  
     <br>
-    <input type = "submit" value="Registrarse">
+    <input id="registroenviar" type = "submit" value="Registrarse">
 </form>

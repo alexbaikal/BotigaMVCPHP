@@ -1,5 +1,5 @@
 <?php
-class PedidoController
+class UsuarioPedidoController
 {
 
 

@@ -39,5 +39,7 @@ if (isset($categorias)) {
         echo "</li>";
     }
     echo "</ul>";
+} else {
+    echo "No hay categorias";
 }
 ?>

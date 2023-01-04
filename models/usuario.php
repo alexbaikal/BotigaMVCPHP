@@ -215,7 +215,7 @@ class Usuario extends Database {
             echo "Usuario modificado correctamente";
 
             //after 1 second, redirect to the user page
-            header("refresh:0.1; url=index.php?controller=Usuario&action=iniciarModificarUsuario");
+            header("refresh:0.5; url=index.php?controller=Usuario&action=iniciarModificarUsuario");
         
     }
 }

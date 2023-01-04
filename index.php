@@ -31,6 +31,7 @@ require_once "views/general/cabecera.html";
 require_once 'models/category.php';
 
 $category = new Category();
+//$administrador = new Administrador();
 
 $category->conectar();
 $categorias = $category->mostrarCategorias();

@@ -1,6 +1,6 @@
 <?php
 
-class CestaController
+class UsuarioCestaController
 {
     public function iniciarModificarCesta()
     {

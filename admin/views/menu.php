@@ -11,19 +11,19 @@
     }
     if ($role == 'admin') {
 
-        echo "<li>Bienvenido " . $_SESSION['role']."</li>";
-        echo '<li> <a href="/BotigaMVCPHP/index.php">Volver</a></li>';
+        echo "<li id='bienvenido'>Bienvenido " . $_SESSION['role']."</li>";
+        echo '<li class="menuacceadmin as"> <a href="/BotigaMVCPHP/index.php">Volver</a></li>';
 
 
-        echo "<li> <a href= \"admin.php?controller=Administrador&action=iniciarVistaProductos\" >Mostrar productes</a></li>";
-        echo "<li> <a href= \"admin.php?controller=Administrador&action=iniciarVistaCategorias\" >Mostrar categories</a></li>";
-        echo "<li> <a href= \"admin.php?controller=Pedido&action=iniciarVistaPedidos\" >Mostrar pedidos</a></li>";
-        echo "<li> <a href= \"admin.php?controller=Administrador&action=cerrarSesion\"> Cerrar sessió </a></li>";
+        echo "<li class='menuacceadmin as'> <a href= \"admin.php?controller=Administrador&action=iniciarVistaProductos\" >Mostrar productes</a></li>";
+        echo "<li class='menuacceadmin as'> <a href= \"admin.php?controller=Administrador&action=iniciarVistaCategorias\" >Mostrar categories</a></li>";
+        echo "<li class='menuacceadmin as'> <a href= \"admin.php?controller=Pedido&action=iniciarVistaPedidos\" >Mostrar pedidos</a></li>";
+        echo "<li class='menuacceadmin as'> <a href= \"admin.php?controller=Administrador&action=cerrarSesion\"> Cerrar sessió </a></li>";
     } else {
-        echo '<li> <a href="/botigamvcphp/index.php">Volver</a></li>';
+        echo '<li class="menuacceadmin"> <a href="/botigamvcphp/index.php">Volver</a></li>';
 
-        echo "<li> <a href= \"admin.php?controller=Administrador&action=iniciarLogin\"> Login </a></li>";
-        echo "<li> <a href= \"admin.php?controller=Administrador&action=cerrarSesion\"> Cerrar sessió </a></li>";
+        echo "<li class='menuacceadmin'> <a href= \"admin.php?controller=Administrador&action=iniciarLogin\"> Login </a></li>";
+        echo "<li class='menuacceadmin'> <a href= \"admin.php?controller=Administrador&action=cerrarSesion\"> Cerrar sessió </a></li>";
     }
     ?>
 </ul>
