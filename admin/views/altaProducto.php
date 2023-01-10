@@ -1,38 +1,37 @@
 
 
 
-<h2>Añadir producto nuevo</h2>
+<h2 id="titulo_altaproductos">Añadir producto nuevo</h2>
 <!--Crear un form con action="admin.php?controller=Administrador&action=iniciarAltaProducto" method="post" y que tenga control de entrada (nombre tiene que ser un texto, precio tiene que ser un float, etc...)-->
 
-<form action="admin.php?controller=Administrador&action=altaProducto" method="post">
-    Nombre:
-    <input type="text" name = "nombre">
+<form action="admin.php?controller=Administrador&action=altaProducto" method="post" id="form_altaproductos">
+    
+    <input class="alta_productos" type="text" name = "nombre" placeholder="Nombre">
     <br/>
 
-    Descripción:
-    <input type="text" name = "descripcion">
+    
+    <input class="alta_productos" type="text" name = "descripcion" placeholder="Descripción">
     <br/>
 
-    Cantidad:
-    <input type="number" name = "cantidad">
+    
+    <input class="alta_productos" type="number" name = "cantidad" placeholder="Cantidad">
     <br/>
 
-    Precio:
-    <input type="text" name = "precio">
+    
+    <input class="alta_productos" type="text" name = "precio" placeholder="Precio">
     <br/>
 
-    Categoria:
-    <input type="text" name = "categoria">
+    
+    <input class="alta_productos" type="number" name = "categoria" placeholder="Categoria">
     <br/>
 
-    Imagen:
-    <input type="text" name = "foto">
+    
+    <input class="alta_productos" type="file" name = "foto" placeholder="Imagen">
 
-    Activo:
-    <input type="checkbox" name = "isactive">
+    
     <br/>
 
-    <input type = "submit" value="Añadir producto">
+    <input id="submit_altaproductos" type = "submit" value="Añadir producto">
     <br/>
 
     

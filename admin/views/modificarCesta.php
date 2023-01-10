@@ -1,31 +1,28 @@
-<h2>Modificar cesta</h2>
+<h2 id="titulo_modcategorias">Modificar cesta</h2>
 
 
-<form action="admin.php?controller=CestaAdmin&action=modificarCesta" method="post">
+<form action="admin.php?controller=Cesta&action=modificarCesta" method="post" id="form_modcestapedido">
 
     <input type="hidden" name="id_cesta" value="<?php echo $cesta->getIdCesta(); ?>">
 
-
-    Usuario:
+    <p id="activo_modcestaproducto">Usuario:</p>
     <?php
     echo $cesta->getNombreUsuario();
     ?>
     <br />
 
-    Precio total:
-    <input type="text" name="precio_total" value="<?php echo $cesta->getPrecioTotal() ?>">
+    <p id="activo_modcestaproducto">Precio total:</p>
+    <input class="mod_cestapedidos" type="text" name="precio_total" value="<?php echo $cesta->getPrecioTotal() ?>">
     <br />
 
 
-    <input type="submit" value="Modificar">
+    <input id="submit_modcestapedidos" type="submit" value="Modificar">
 
-
-    <?php
-
-    //get products in getListaProductos()
+</form>
+<?php
+//get products in getListaProductos()
     $todosLosProductosCesta = $cesta->getListaProductos();
 
     require_once "./views/mostrarProductosCesta.php";
 
     ?>
-</form>

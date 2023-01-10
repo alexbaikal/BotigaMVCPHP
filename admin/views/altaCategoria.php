@@ -1,23 +1,19 @@
 
+<button id="boton_vuelta_altacategorias" type="button" class="btn btn-primary" onclick="window.location.href='admin.php?controller=Administrador&action=iniciarVistaCategorias'">Tornar</button>
 
+<h2 id="titulo_altacategorias">Alta categoria</h2>
 
-<h2>Alta categoria</h2>
-
-
-<form action="admin.php?controller=Administrador&action=altaCategoria" method="post">
+<form action="admin.php?controller=Administrador&action=altaCategoria" method="post" id="form_altacategoria">
     
-Nombre:
-    <input type="text" name = "nombre">
+    
+    <input class="alta_categorias" type="text" name = "nombre" placeholder="Nombre">
     <br/>
 
-    Descripción:
-    <input type="text" name = "descripcion">
+    
+    <input class="alta_categorias" type="text" name = "descripcion" placeholder="Descripción">
     <br/>
 
-    <input type = "submit" value="Afegir categoria">
+    <input id="submit_altacategorias" type = "submit" value="Afegir categoria">
 </form>
 <br/>
-
-<button type="button" class="btn btn-primary" onclick="window.location.href='admin.php?controller=Administrador&action=iniciarVistaCategorias'">Tornar</button>
-
 

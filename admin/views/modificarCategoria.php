@@ -1,30 +1,30 @@
 
 
 
-<h2>Modificar categoría</h2>
+<h2 id="titulo_modcestapedidos">Modificar categoría</h2>
 
 
-<form action="admin.php?controller=Administrador&action=modificarCategoria" method="post">
+<form action="admin.php?controller=Administrador&action=modificarCategoria" method="post" id="form_modcategoria">
     
     <input type="hidden" name="id_categoria" value="<?php echo $categoria->getIdCategoria(); ?>">
 
 
-    Nombre:
-    <input type="text" name = "nombre" value="<?php echo $categoria->getNombre() ?>">
+    
+    <input class="mod_categorias" type="text" name = "nombre" value="<?php echo $categoria->getNombre() ?>" placeholder="Nombre">
     <br/>
 
-    Descripción:
-    <input type="text" name = "descripcion" value="<?php echo $categoria->getDescripcion() ?>">
+    
+    <input class="mod_categorias" type="text" name = "descripcion" value="<?php echo $categoria->getDescripcion() ?>" placeholder="Descripción">
     <br/>
 
-    Activo:
+    <p id="activo_modcategorias">Activo</p>
     <input type="checkbox" name = "isactive" <?php if ($categoria->getIsActive() == 1) {
         echo "checked";
     } else {
         echo "";
     } ?>>
     
-    <input type = "submit" value="Modificar categoria">
+    <input id="submit_modcategorias" type = "submit" value="Modificar categoria">
     <br/>
 
 </form>

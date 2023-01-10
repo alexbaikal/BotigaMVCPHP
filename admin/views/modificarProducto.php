@@ -1,33 +1,33 @@
 
 
 
-<h2>Modificar producto</h2>
+<h2 id="modificar_producto_titulo">Modificar producto</h2>
 <!--Crear un form con action="admin.php?controller=Administrador&action=iniciarAltaProducto" method="post" y que tenga control de entrada (nombre tiene que ser un texto, precio tiene que ser un float, etc...)-->
 <?php
 ?>
-<form action="admin.php?controller=Administrador&action=modificarProducto" method="post">
+<form action="admin.php?controller=Administrador&action=modificarProducto" method="post" id="form_modproducto">
     <input type="hidden" name="id" value="<?php echo $producto->getIdProducto(); ?>">
-    Nombre:
-    <input type="text" name = "nombre" value="<?php echo $producto->getNombre() ?>">
+    
+    <input class="mod_productos" type="text" name = "nombre" value="<?php echo $producto->getNombre() ?>" placeholder="Nombre">
     <br/>
 
-    Descripción:
-    <input type="text" name = "descripcion" value="<?php echo $producto->getDescripcion() ?>">
+    
+    <input class="mod_productos" type="text" name = "descripcion" value="<?php echo $producto->getDescripcion() ?>" placeholder="Descripción">
     <br/>
 
-    Cantidad:
-    <input type="number" name = "cantidad"  value="<?php echo $producto->getCantidad() ?>">
+    
+    <input class="mod_productos" type="number" name = "cantidad"  value="<?php echo $producto->getCantidad() ?>" placeholder="Cantidad">
     <br/>
 
-    Precio:
-    <input type="text" name = "precio"  value="<?php echo $producto->getPrecio() ?>">
+    
+    <input class="mod_productos" type="text" name = "precio"  value="<?php echo $producto->getPrecio() ?>" placeholder="Precio">
     <br/>
 
-    Categoria:
-    <input type="number" name = "categoria"  value="<?php echo $producto->getCategoria() ?>">
+    
+    <input class="mod_productos" type="number" name = "categoria"  value="<?php echo $producto->getCategoria() ?>" placeholder="Categoria">
     <br/>
 
-    Activo:
+    <p id="activo_modproducto">Activo</p>
     <input type="checkbox" name = "isactive" <?php if ($producto->getIsActive() == 1) {
         echo "checked";
     } else {
@@ -35,9 +35,9 @@
     } ?>>
     
 
-    Imagen:
-    <input type="text" name = "foto"  value="<?php echo $producto->getFoto() ?>">
-    <input type = "submit" value="Modificar producto">
+
+    <input class="mod_productos" type="file" name = "foto"  value="<?php echo $producto->getFoto() ?>">
+    <input id="submit_modproductos" type = "submit" value="Modificar producto">
     <br/>
 
 </form>

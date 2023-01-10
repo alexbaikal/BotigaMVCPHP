@@ -32,12 +32,8 @@ if (isset($_POST['search'])) {
   });
 }
 
-
-
-
-
-?>
-
+  ?>
+  <img id="imgprueba" src="./media/dd.jpg">
 
 
 <div class="grid">
@@ -74,56 +70,3 @@ if (isset($_POST['search'])) {
   ?>
  
 </div>
-
-
-<style>
-  .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 10px;
-}
-.item {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  /*grid is column oriented*/
-  grid-column: span 1;
-  /*set maximum width of 200px*/
-  max-width: 250px;
-}
-#categoria {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(123, 65, 111, 0.5);;
-  color: #fff;
-  padding: 5px;
-  border-radius: 10px 0 0 0;
-}
-#precio {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: rgb(155, 255, 100, 1);
-  color: #567;
-  padding: 5px;
-  border-radius: 0 0 0 10px;
-}
-#stock {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: rgb(255, 100, 100, 1);
-  color: #567;
-  padding: 5px;
-  border-radius: 0 0 10px 0;
-}
-/*Stock overlaps the form, to solve: */
-.item form {
-  position: relative;
-  z-index: 1;
-}
-</style>
