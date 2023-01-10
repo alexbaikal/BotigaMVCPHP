@@ -82,7 +82,10 @@ class Cesta extends Database
 
 
     function fetchCesta() {
-        $this->id_cesta = $_GET['id_cesta'];
+        if (isset($_GET['fk_id_cesta'])) {
+            $this->id_cesta = $_GET['fk_id_cesta'];
+
+        }
         $sql = "SELECT * FROM cestas WHERE id_cesta = ".$this->id_cesta;
         
         $result = $this->db->query($sql);
@@ -125,7 +128,6 @@ class Cesta extends Database
     }
 
     function modificarProductoCesta() {
-     
         //modify the quantity of the product in the basket
         $sql = "UPDATE cesta_productos SET cantidad = ".$this->cantidad_producto_cesta." WHERE fk_id_cesta = ".$this->id_cesta." AND fk_id_producto = ".$this->id_producto;
       

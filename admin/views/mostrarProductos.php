@@ -6,13 +6,12 @@
   //add product button
   if ($_SESSION['role'] == 'admin') {
   
-  echo "<a href='admin.php?controller=Administrador&action=iniciarAltaProducto' class='btn btn-primary'>Añadir producto</a>";
+  echo "<a id='añadir_producto' href='admin.php?controller=Administrador&action=iniciarAltaProducto' class='btn btn-primary'>Añadir producto</a>";
 
-   echo "<table border='1'>";
-  
-  
-    echo "<p>Lista de productes:</p>";
-    echo "<table border='1'>";
+  //  echo "<table border='1'>";
+  //   echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de productos</p>";
+
+    echo "<table border='1' id='tablaproductos'>";
     echo "<tr>";
     echo "<th>Id</th>";
     echo "<th>Nombre</th>";

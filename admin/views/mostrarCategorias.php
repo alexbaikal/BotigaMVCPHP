@@ -3,10 +3,10 @@
 
 <?php
   if ($_SESSION['role'] == 'admin') {
-    echo "<a href='admin.php?controller=Administrador&action=iniciarAltaCategoria' class='btn btn-primary'>Afegir categoria</a>";
-    echo "<table border='1'>";
-    echo "<p>Categorías:</p>";
-    echo "<table border='1'>";
+    echo "<a id='añadir_categoria' href='admin.php?controller=Administrador&action=iniciarAltaCategoria' class='btn btn-primary'>Añadir categoria</a>";
+    // echo "<table border='1'>";
+    // echo "<p>Esto es un ejemplo de como se puede mostrar la tabla de categorias</p>";
+    echo "<table border='1' id='tablacategorias'>";
     echo "<tr>";
     echo "<th>Id</th>";
     echo "<th>Nombre</th>";

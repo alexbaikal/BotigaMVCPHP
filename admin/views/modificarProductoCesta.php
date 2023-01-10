@@ -1,7 +1,7 @@
 <h2>Modificar producto</h2>
 
 
-<form action="admin.php?controller=CestaAdmin&action=modificarProductoCesta" method="post">
+<form action="admin.php?controller=Cesta&action=modificarProductoCesta" method="post">
 
     <input type="hidden" name="id_cesta" value="<?php echo $cesta->getIdCesta(); ?>">
 

@@ -153,8 +153,10 @@ class CestaController {
 
             $cesta = new Cesta();
             $cesta->setIdCesta($id_cesta);
+        
             $cesta->conectar();
             $cesta->fetchCesta();
+
             require_once "./views/modificarCesta.php";
 
             require_once "./models/administrador.php";

@@ -163,12 +163,7 @@ class Product extends Database
 
         //add a search bar
 
-        echo "<div style='display: flex; justify-content: center; margin-bottom: 20px; align-items:center;'>";
-        echo "<form action='adminCourses.php' method='GET'>";
-        echo "<input type='text' name='search' placeholder='Cerca per nom del producte o id'>";
-        echo "<input type='submit' value='🔎'>";
-        echo "</form>";
-        echo "</div>";
+
 
         //if the search bar is not empty, search for the teacher
         $query = "SELECT * FROM courses";
@@ -264,7 +259,7 @@ class Product extends Database
             $sql = "INSERT INTO cesta_productos (fk_id_cesta, fk_id_producto, cantidad) VALUES (" . $this->id_cesta . ", " . $this->id_producto . ", " . $this->cantidad_cesta . ")";
             $this->db->query($sql);
             //redirect page to Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta
-            header("Location: admin.php?controller=CestaAdmin&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
+            header("Location: admin.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
 
             return "Producto añadido a la cesta: " . $this->id_producto . "<br/>";
         } else {
@@ -278,7 +273,7 @@ class Product extends Database
         $this->db->query($sql);
 
         //redirect page to Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta
-        header("Location: admin.php?controller=CestaAdmin&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
+        header("Location: admin.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=$this->id_cesta");
         return "Producto eliminado de la cesta: " . $this->id_producto . "<br/>";
     }
 }
