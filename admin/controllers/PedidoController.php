@@ -24,12 +24,6 @@ class PedidoController
         require_once "./views/mostrarPedidos.php";
     }
 
-    public function iniciarAltaPedido()
-    {
-        echo "no implementado";
-        require_once "./views/altaPedido.php";
-    }
-
     public function iniciarModificarPedido()
     {
 

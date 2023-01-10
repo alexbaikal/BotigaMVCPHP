@@ -3,7 +3,6 @@
 
 <?php
 if ($_SESSION['role'] == 'admin') {
-    echo "<a href='admin.php?controller=Pedido&action=iniciarAltaPedido' class='btn btn-primary'>Añadir pedido</a>";
     echo "<table border='1'>";
     echo "<p>Lista de pedidos:</p>";
     echo "<table border='1'>";

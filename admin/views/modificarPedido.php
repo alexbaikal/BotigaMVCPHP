@@ -84,7 +84,7 @@
     
     Cesta:
     <!--boton para ir a modificar la cesta que pase el fk_id_cesta-->
-    <a href="admin.php?controller=Cestan&action=iniciarModificarCesta&id_cesta=<?php echo $pedido->getFkIdCesta(); ?>" class="btn btn-primary">Modificar cesta</a>
+    <a href="admin.php?controller=Cesta&action=iniciarModificarCesta&id_cesta=<?php echo $pedido->getFkIdCesta(); ?>" class="btn btn-primary">Modificar cesta</a>
     <br/>
     <br/>
     <input type = "submit" value="Modificar pedido">
