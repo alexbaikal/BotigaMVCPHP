@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 'admin') {
     echo "Bienvenido, ".$nombre_usuario['nombre'];
     echo "<br>";
     echo "<a href='index.php?controller=Usuario&action=logout'>Cerrar sesión</a>";
