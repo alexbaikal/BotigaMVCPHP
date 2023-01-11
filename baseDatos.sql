@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Время создания: Дек 19 2022 г., 23:51
--- Версия сервера: 10.4.24-MariaDB
--- Версия PHP: 7.4.28
+-- Host: 127.0.0.1
+-- Generation Time: Jan 11, 2023 at 09:28 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `botiga`
+-- Database: `botiga`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `categorias`
+-- Table structure for table `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -54,18 +54,19 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `categorias`
+-- Dumping data for table `categorias`
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) VALUES
 (1, 'Zapatos', 'Replica exacta.', 1),
-(2, 'Todos', 'De todo!', 1),
-(3, 'Blusas', 'Bastante grandes ', 1);
+(2, 'Otros', 'De todo!', 1),
+(3, 'Blusas', 'Bastante grandes ', 1),
+(7, 'Pantalones', 'Buenos para hinvierno.', 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `cestas`
+-- Table structure for table `cestas`
 --
 
 CREATE TABLE `cestas` (
@@ -75,17 +76,17 @@ CREATE TABLE `cestas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `cestas`
+-- Dumping data for table `cestas`
 --
 
 INSERT INTO `cestas` (`id_cesta`, `fk_id_usuario`, `precio_total`) VALUES
 (1, 1, 100),
-(23, 2, 25);
+(23, 2, 230);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `cesta_productos`
+-- Table structure for table `cesta_productos`
 --
 
 CREATE TABLE `cesta_productos` (
@@ -95,18 +96,17 @@ CREATE TABLE `cesta_productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `cesta_productos`
+-- Dumping data for table `cesta_productos`
 --
 
 INSERT INTO `cesta_productos` (`fk_id_cesta`, `fk_id_producto`, `cantidad`) VALUES
-(1, 1, 3),
-(23, 2, 2),
+(1, 1, 4),
 (23, 11, 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `empresa_transporte`
+-- Table structure for table `empresa_transporte`
 --
 
 CREATE TABLE `empresa_transporte` (
@@ -116,7 +116,7 @@ CREATE TABLE `empresa_transporte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `empresa_transporte`
+-- Dumping data for table `empresa_transporte`
 --
 
 INSERT INTO `empresa_transporte` (`id_empresa_transporte`, `nombre_empresa_transporte`, `precio_empresa_transporte`) VALUES
@@ -127,7 +127,7 @@ INSERT INTO `empresa_transporte` (`id_empresa_transporte`, `nombre_empresa_trans
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `pedidos`
+-- Table structure for table `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -141,16 +141,18 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `pedidos`
+-- Dumping data for table `pedidos`
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `fk_id_cesta`, `fk_id_empresa_transporte`, `fk_id_usuario`, `num_seguimiento`, `estado`, `fecha`) VALUES
-(1, 1, 3, 1, 'sin seguimiento.', 2, 1671473220);
+(1, 1, 3, 1, 'sin seguimiento.', 2, 1671473220),
+(2, 23, 3, 2, 'sin asignar', 0, 1673423270),
+(3, 23, 1, 2, 'sin asignar', 0, 1673423663);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -165,19 +167,19 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `cantidad`, `precio`, `categoria`, `foto`, `isactive`) VALUES
-(1, 'Camisa', 'Buena camisa de calidad', 4, 15, 1, 'https://depor.com/resizer/BdfCWDPbdNccDG_sY-atb0ZI8nA=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/3Z2SZYXOEBCVDEOTIVIBF2ZNUE.jpg', 0),
-(2, 'Gafas', 'Accesorio gafas', 6, 2, 2, 'https://depor.com/resizer/BdfCWDPbdNccDG_sY-atb0ZI8nA=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/3Z2SZYXOEBCVDEOTIVIBF2ZNUE.jpg', 1),
-(11, 'Borrar', 'Producto inútil', 4, 23, 3, '', 1),
-(12, 'birara', 'asdasd', 5, 13, 1, 'https://boiab.ahe.eh/agf', 1);
+(1, 'Camisa', 'Buena camisa de calidad', 4, 15, 3, 'https://cdn.grupoelcorteingles.es/statics/manager/contents/images/uploads/2022/02/rJLYTyu19.jpeg', 1),
+(2, 'Gafas', 'Accesorio gafas', 2, 2, 2, 'https://magento.opticalia.com/media/catalog/product/cache/e4be6767ec9b37c1ae8637aee2f57a6a/p/j/pjg338112.png', 1),
+(11, 'Jeans', 'Producto útil', 3, 23, 7, 'https://media.gettyimages.com/id/173239968/es/foto/fino-herm%C3%A9tico-jeans-azul-sobre-fondo-blanco.jpg?s=612x612&w=gi&k=20&c=Dt203p3YIQW-vcbKcZoxnvGsC0tDZNy-aeQLTFCDj3E=', 1),
+(12, 'Gorro', 'Perfecto para hinvierno!', 5, 13, 1, 'https://cdn01.pisamonas.es/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/g/o/gorro-borla-pompon-pelo_4_.jpg', 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -192,7 +194,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `telefono`, `contraseña`, `direccion`, `provincia`, `cp`) VALUES
@@ -200,126 +202,125 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `telefono`, `contrase�
 (2, 'Aleksandr Baikalov', 'alexander.baikalov@inslapineda.cat', '6978679', '$2y$10$gQ7XZwWjnB0S3VccmsB8xOX1ftT.G98yajlZr4dN5FsE05EC2cZ/e', 'Marquès sant-mori 174 6-3', 'Badalona', '08918');
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Индексы таблицы `categorias`
+-- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Индексы таблицы `cestas`
+-- Indexes for table `cestas`
 --
 ALTER TABLE `cestas`
   ADD PRIMARY KEY (`id_cesta`),
   ADD UNIQUE KEY `Foreign key` (`fk_id_usuario`) USING BTREE;
 
 --
--- Индексы таблицы `cesta_productos`
+-- Indexes for table `cesta_productos`
 --
 ALTER TABLE `cesta_productos`
   ADD UNIQUE KEY `fk_id_producto` (`fk_id_producto`,`fk_id_cesta`),
   ADD KEY `fk_id_cesta` (`fk_id_cesta`);
 
 --
--- Индексы таблицы `empresa_transporte`
+-- Indexes for table `empresa_transporte`
 --
 ALTER TABLE `empresa_transporte`
   ADD PRIMARY KEY (`id_empresa_transporte`);
 
 --
--- Индексы таблицы `pedidos`
+-- Indexes for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`id_pedido`),
-  ADD UNIQUE KEY `Foreign keys` (`fk_id_cesta`,`fk_id_empresa_transporte`,`fk_id_usuario`);
+  ADD PRIMARY KEY (`id_pedido`);
 
 --
--- Индексы таблицы `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `Foreign keys` (`categoria`);
 
 --
--- Индексы таблицы `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT для таблицы `categorias`
+-- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_categoria` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT для таблицы `cestas`
+-- AUTO_INCREMENT for table `cestas`
 --
 ALTER TABLE `cestas`
   MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT для таблицы `empresa_transporte`
+-- AUTO_INCREMENT for table `empresa_transporte`
 --
 ALTER TABLE `empresa_transporte`
   MODIFY `id_empresa_transporte` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `pedidos`
+-- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT для таблицы `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT для таблицы `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения внешнего ключа таблицы `cestas`
+-- Constraints for table `cestas`
 --
 ALTER TABLE `cestas`
   ADD CONSTRAINT `cestas_ibfk_2` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
--- Ограничения внешнего ключа таблицы `cesta_productos`
+-- Constraints for table `cesta_productos`
 --
 ALTER TABLE `cesta_productos`
   ADD CONSTRAINT `cesta_productos_ibfk_1` FOREIGN KEY (`fk_id_cesta`) REFERENCES `cestas` (`id_cesta`),
   ADD CONSTRAINT `cesta_productos_ibfk_2` FOREIGN KEY (`fk_id_producto`) REFERENCES `productos` (`id_producto`);
 
 --
--- Ограничения внешнего ключа таблицы `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`);
