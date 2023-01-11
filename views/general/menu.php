@@ -14,7 +14,7 @@ else {
     <!--<li> <a href= "index.php?controller=Usuario&action=modificar" >Modificar usuario </a></li>
     <li> <a href= "index.php?controller=Usuario&action=eliminar" >Eliminar usuario </a></li>-->
     <li> <a class="menuira isa" href= "admin/admin.php">Panel Admin</a></li>
-    <li> <a class="menuira isa" href= "index.php?controller=Usuario&action=mostrarTodos">Volver </a></li>
+    <li> <a class="menuira isa" href= "index.php">Inicio </a></li>
 </ul>
 
 <!--Get all categories-->
