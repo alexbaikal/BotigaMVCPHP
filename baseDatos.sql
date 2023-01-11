@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 09:50 AM
+-- Generation Time: Jan 11, 2023 at 10:00 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -81,7 +81,7 @@ CREATE TABLE `cestas` (
 
 INSERT INTO `cestas` (`id_cesta`, `fk_id_usuario`, `precio_total`) VALUES
 (1, 1, 100),
-(23, 2, 230);
+(23, 2, 253);
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE `cesta_productos` (
 
 INSERT INTO `cesta_productos` (`fk_id_cesta`, `fk_id_producto`, `cantidad`) VALUES
 (1, 1, 4),
-(23, 11, 1);
+(23, 11, 2);
 
 -- --------------------------------------------------------
 
@@ -175,11 +175,7 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `cantidad`, `pr
 (2, 'Gafas', 'Accesorio gafas', 2, 2, 7, 'https://magento.opticalia.com/media/catalog/product/cache/e4be6767ec9b37c1ae8637aee2f57a6a/p/j/pjg338112.png', 1),
 (11, 'Jeans', 'Producto útil', 3, 23, 2, 'https://media.gettyimages.com/id/173239968/es/foto/fino-herm%C3%A9tico-jeans-azul-sobre-fondo-blanco.jpg?s=612x612&w=gi&k=20&c=Dt203p3YIQW-vcbKcZoxnvGsC0tDZNy-aeQLTFCDj3E=', 1),
 (12, 'Gorro', 'Perfecto para hinvierno!', 5, 13, 1, 'https://cdn01.pisamonas.es/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/g/o/gorro-borla-pompon-pelo_4_.jpg', 1),
-(24, 'Tatuaje', 'Tatuaje moderno.', 31, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1),
-(25, '', '', 0, 0, 0, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1),
-(26, '', '', 0, 0, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 0),
-(27, 'Tatuaje', 'Tatu', 31, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1),
-(28, 'Tatuaje', 'Tatuaje moderno.', 31, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1);
+(24, 'Tatuaje', 'Tatuaje moderno.', 9, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -281,7 +277,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `cestas`
 --
 ALTER TABLE `cestas`
-  MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_cesta` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `empresa_transporte`
@@ -312,12 +308,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Constraints for table `categorias`
---
-ALTER TABLE `categorias`
-  ADD CONSTRAINT `categorias_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `productos` (`categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `cestas`
 --
 ALTER TABLE `cestas`
@@ -329,6 +319,12 @@ ALTER TABLE `cestas`
 ALTER TABLE `cesta_productos`
   ADD CONSTRAINT `cesta_productos_ibfk_1` FOREIGN KEY (`fk_id_cesta`) REFERENCES `cestas` (`id_cesta`),
   ADD CONSTRAINT `cesta_productos_ibfk_2` FOREIGN KEY (`fk_id_producto`) REFERENCES `productos` (`id_producto`);
+
+--
+-- Constraints for table `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

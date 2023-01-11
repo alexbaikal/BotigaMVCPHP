@@ -50,6 +50,11 @@ class UsuarioCestaController
             $cantidad_producto = $_POST['cantidad'];
 
             if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == "admin") {
+                    echo "Los administradores no pueden añadir productos a la cesta.";
+                    header("refresh:1;url=index.php?controller=Usuario&action=mostrarTodos");
+                    return;
+                }
                 if ($cantidad_producto > 0 ) {
                     require_once "./models/cesta.php";
                     $cesta = new Cesta();
