@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 09:28 AM
+-- Generation Time: Jan 11, 2023 at 09:50 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -58,10 +58,10 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`, `isactive`) VALUES
-(1, 'Zapatos', 'Replica exacta.', 1),
-(2, 'Otros', 'De todo!', 1),
+(1, 'Todos', 'Replica exacta de ropas de marca.', 1),
+(2, 'Pantalones', 'Buenos para hinvierno.', 1),
 (3, 'Blusas', 'Bastante grandes ', 1),
-(7, 'Pantalones', 'Buenos para hinvierno.', 1);
+(7, 'Otros', 'De todo!', 1);
 
 -- --------------------------------------------------------
 
@@ -172,9 +172,14 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `cantidad`, `precio`, `categoria`, `foto`, `isactive`) VALUES
 (1, 'Camisa', 'Buena camisa de calidad', 4, 15, 3, 'https://cdn.grupoelcorteingles.es/statics/manager/contents/images/uploads/2022/02/rJLYTyu19.jpeg', 1),
-(2, 'Gafas', 'Accesorio gafas', 2, 2, 2, 'https://magento.opticalia.com/media/catalog/product/cache/e4be6767ec9b37c1ae8637aee2f57a6a/p/j/pjg338112.png', 1),
-(11, 'Jeans', 'Producto útil', 3, 23, 7, 'https://media.gettyimages.com/id/173239968/es/foto/fino-herm%C3%A9tico-jeans-azul-sobre-fondo-blanco.jpg?s=612x612&w=gi&k=20&c=Dt203p3YIQW-vcbKcZoxnvGsC0tDZNy-aeQLTFCDj3E=', 1),
-(12, 'Gorro', 'Perfecto para hinvierno!', 5, 13, 1, 'https://cdn01.pisamonas.es/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/g/o/gorro-borla-pompon-pelo_4_.jpg', 1);
+(2, 'Gafas', 'Accesorio gafas', 2, 2, 7, 'https://magento.opticalia.com/media/catalog/product/cache/e4be6767ec9b37c1ae8637aee2f57a6a/p/j/pjg338112.png', 1),
+(11, 'Jeans', 'Producto útil', 3, 23, 2, 'https://media.gettyimages.com/id/173239968/es/foto/fino-herm%C3%A9tico-jeans-azul-sobre-fondo-blanco.jpg?s=612x612&w=gi&k=20&c=Dt203p3YIQW-vcbKcZoxnvGsC0tDZNy-aeQLTFCDj3E=', 1),
+(12, 'Gorro', 'Perfecto para hinvierno!', 5, 13, 1, 'https://cdn01.pisamonas.es/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/g/o/gorro-borla-pompon-pelo_4_.jpg', 1),
+(24, 'Tatuaje', 'Tatuaje moderno.', 31, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1),
+(25, '', '', 0, 0, 0, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1),
+(26, '', '', 0, 0, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 0),
+(27, 'Tatuaje', 'Tatu', 31, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1),
+(28, 'Tatuaje', 'Tatuaje moderno.', 31, 3, 7, 'https://ae01.alicdn.com/kf/Hf0d7952f751e48a58ebf0c0774d0a5d2k.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +299,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -305,6 +310,12 @@ ALTER TABLE `usuarios`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `categorias`
+--
+ALTER TABLE `categorias`
+  ADD CONSTRAINT `categorias_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `productos` (`categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `cestas`
@@ -318,12 +329,6 @@ ALTER TABLE `cestas`
 ALTER TABLE `cesta_productos`
   ADD CONSTRAINT `cesta_productos_ibfk_1` FOREIGN KEY (`fk_id_cesta`) REFERENCES `cestas` (`id_cesta`),
   ADD CONSTRAINT `cesta_productos_ibfk_2` FOREIGN KEY (`fk_id_producto`) REFERENCES `productos` (`id_producto`);
-
---
--- Constraints for table `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
